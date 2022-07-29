@@ -1,0 +1,9 @@
+D:\VS 2015\BMS\DAL\bin\Debug\DAL.dll
+D:\VS 2015\BMS\DAL\bin\Debug\DAL.pdb
+D:\VS 2015\BMS\DAL\bin\Debug\Dapper.dll
+D:\VS 2015\BMS\DAL\bin\Debug\Domain.dll
+D:\VS 2015\BMS\DAL\bin\Debug\Domain.pdb
+D:\VS 2015\BMS\DAL\bin\Debug\Dapper.xml
+D:\VS 2015\BMS\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\VS 2015\BMS\DAL\obj\Debug\DAL.dll
+D:\VS 2015\BMS\DAL\obj\Debug\DAL.pdb
