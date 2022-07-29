@@ -1,0 +1,5 @@
+D:\VS 2015\BMS\Domain\bin\Debug\Domain.dll
+D:\VS 2015\BMS\Domain\bin\Debug\Domain.pdb
+D:\VS 2015\BMS\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache
+D:\VS 2015\BMS\Domain\obj\Debug\Domain.dll
+D:\VS 2015\BMS\Domain\obj\Debug\Domain.pdb
