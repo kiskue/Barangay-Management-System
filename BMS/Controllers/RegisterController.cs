@@ -10,6 +10,7 @@ using System.Web.Security;
 using System.Data;
 
 
+
 namespace BMS.Controllers
 {
     public class RegisterController : Controller
@@ -103,6 +104,7 @@ namespace BMS.Controllers
         {
             return View();
         }
+        
         [HttpPost]
         public ActionResult Login(UserLogin LgnUsr)
         {
@@ -127,6 +129,8 @@ namespace BMS.Controllers
             }
             return View();
         }
+        
+       
         public ActionResult ForgetPassword()
         {
             return View();

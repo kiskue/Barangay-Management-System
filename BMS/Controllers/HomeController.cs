@@ -7,6 +7,7 @@ using System.Data;
 using System.Configuration;
 using System.Data.SqlClient;
 using BMS.Models;
+using System.Data.Entity;
 
 namespace BMS.Controllers
 {
@@ -16,13 +17,14 @@ namespace BMS.Controllers
 
         public ActionResult Index()
         {
+           
             return View();
         }
         public ActionResult Dashboard()
         {
             return View();
         }
-
+      
         public ActionResult Location()
         {
 
@@ -70,12 +72,16 @@ namespace BMS.Controllers
                     cmd.Parameters.AddWithValue("@Religion", location.Religion);
                     cmd.Parameters.AddWithValue("@Status", location.Status);
                     cmd.ExecuteNonQuery();
+
+                    TempData["pesan"] = "Data has been save successfuly!!";
+                
                 }
             }
             else
             {
-           
+              
             }
+
             return RedirectToAction("Location");
         }
         public ActionResult Update()
@@ -186,6 +192,9 @@ namespace BMS.Controllers
             }
             return RedirectToAction("Location");
         }
+       
+
 
     }
+
 }

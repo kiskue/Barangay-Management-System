@@ -4,22 +4,22 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
     <title>Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+        rel="stylesheet"/>
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
      <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -36,7 +36,7 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuVyZWwqTq86AJctzNQmhb2hmUt5M7tQE"></script>
-
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script type="text/javascript">
   
     window.onload = function () {
@@ -65,6 +65,7 @@
                 title: data.title
 
             });
+
             (function (markers, data) {
                 google.maps.event.addListener(marker, "click", function (e) {
                     infoWindow.setContent(data.description);
@@ -76,12 +77,15 @@
                 });
             
             })(markers, data);
+
         }
+
     }
 </script>
 
 </head>
-    <form >
+<body id="page-top" >
+    <form id="form1" runat="server">
         <div id="wrapper">
 
             <!-- Sidebar -->
@@ -146,22 +150,31 @@
                             <a class="collapse-item" href="utilities-animation.html">CEDULA</a>
                         </div>
                     </div>
+                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse"
+                       aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-male"></i>
+                        <span>Manage Roles</span>
+                    </a>
+                    <div id="collapse" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Roles:</h6>
+                            <a class="collapse-item" href="ManageRoles.aspx">Super Admin</a>
+                            <a class="collapse-item" href="barangaycertificates.aspx">Admin 1</a>
+                            <a class="collapse-item" href="utilities-animation.html">Admin 2</a>
+                        </div>
+                    </div>
                 </li>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
 
-                <!-- Nav Item - Pages Collapse Menu -->
-                </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link" href="Command.aspx">
+                    <a class="nav-link" href="Hotspot.aspx">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Command center</span>
+                        <span>Hotspot Area</span>
                     </a>
                 </li>
 
@@ -232,7 +245,7 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control bg-light border-0 small"
                                                    placeholder="Search for..." aria-label="Search"
-                                                   aria-describedby="basic-addon2">
+                                                   aria-describedby="basic-addon2"/>
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button">
                                                     <i class="fas fa-search fa-sm"></i>
@@ -285,8 +298,6 @@
 
                         <!-- Content Row -->
                         <div class="row">
-
-                            <!-- Earnings (Monthly) Card Example -->
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
@@ -304,8 +315,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Earnings (Monthly) Card Example -->
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
@@ -371,13 +380,12 @@
                             <!-- Card Header - Dropdown -->
                             <!-- Card Body -->
                             <div class="card-body">
-<body id="page-top" >
-<form id="form1" runat="server">
 
-<br />
+
+<br class="col-xl-3 col-md-6 mb-4"/>
 Search :
-<asp:TextBox ID="txtSearch" runat="server" ></asp:TextBox>
-<asp:Button ID="btnSearch" runat="server" text="Search" OnClick="btnSearch_Click" class="btn btn-primary rounded-0" style="height:32px; text-align:center;" />
+<asp:TextBox ID="txtSearch" runat="server" placeholder="Search Location..." CssClass="p"></asp:TextBox>
+<asp:Button ID="btnSearch" runat="server" text="Search" OnClick="btnSearch_Click" CssClass="btn btn-info p-1 "/>
  <br /> 
 <br />
 <div id="dvMap" style="width: 1200px; height: 500px">

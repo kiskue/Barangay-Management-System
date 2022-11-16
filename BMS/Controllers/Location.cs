@@ -5,7 +5,10 @@ namespace BMS.Controllers
 {
     public class Location
     {
-        public int ID { get; set; }
+
+
+        [Key]
+        public int? ID { get; set; }
         [Required(ErrorMessage = "Please enter city name")]
         [Display(Name = "Residence Name")]
         public string ResidenceName { get; set; }

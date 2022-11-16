@@ -6,16 +6,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using System.Data;
 namespace BMS
 {
     public partial class Index : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
         }
-
+       
         protected void btnlogin_Click(object sender, EventArgs e)
         {
             string constring = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -48,7 +48,50 @@ namespace BMS
 
 
                 }
+
             }
         }
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+
+            string constring = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constring))
+            {
+             
+                SqlCommand cmd = new SqlCommand("AddNewReport", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Name", name.Text);
+                cmd.Parameters.AddWithValue("Latitude", lat.Text);
+                cmd.Parameters.AddWithValue("Longitude", lng.Text);
+                cmd.Parameters.AddWithValue("Landmark", landmark.Text);
+                cmd.Parameters.AddWithValue("IncidentReport", report.Text);
+                cmd.Parameters.AddWithValue("Contact", contact.Text);
+                cmd.Parameters.AddWithValue("Place", place.Value);
+                cmd.Parameters.AddWithValue("Time", time.Text);
+                cmd.Parameters.AddWithValue("Date", date.Text);
+                con.Open();
+                int k = cmd.ExecuteNonQuery();
+                if (k != 0)
+                {
+
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Thank You!', 'Your Report sent Successfully!', 'success')",true);
+
+                    name.Text = "";
+                    lat.Text = "";
+                    lng.Text = "";
+                    landmark.Text = "";
+                    report.Text = "";
+                    contact.Text = "";
+                    place.Value = "";
+                    time.Text = "";
+                    date.Text = "";
+                }
+                con.Close();
+               
+            }
+            
+        }
+       
     }
 }

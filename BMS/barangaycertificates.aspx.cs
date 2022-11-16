@@ -1,93 +1,106 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using System.IO;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
+using System.Collections.Specialized;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Net;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace BMS
 {
     public partial class barangaycertificates : System.Web.UI.Page
     {
+      
         protected void Page_Load(object sender, EventArgs e)
         {
+           
+           
+            if (!IsPostBack)
+            {
+                LoadRecord();
+            }
+        }
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+
+
+                SqlCommand cmd = new SqlCommand("AddCertificates", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Name", Name.Text);
+                cmd.Parameters.AddWithValue("@Email", Email.Text);
+                cmd.Parameters.AddWithValue("@Number", Number.Text);
+                cmd.Parameters.AddWithValue("@StreetNum", StreetNum.Text);
+                cmd.Parameters.AddWithValue("@Purok", Purok.Text);
+                cmd.Parameters.AddWithValue("@Purpose", Purpose.Text);
+                cmd.Parameters.AddWithValue("@Year", Year.Text);
+                cmd.Parameters.AddWithValue("@Day", Day.Value);
+                cmd.Parameters.AddWithValue("@Month", Month.Value);
+                con.Open();
+                int k = cmd.ExecuteNonQuery();
+                if (k != 0)
+                {
+
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Thank You!', 'Your Request sent Successfully!', 'success')", true);
+
+                    Name.Text = "";
+                    Email.Text = "";
+                    Email.Text = "";
+                    Number.Text = "";
+                    StreetNum.Text = "";
+                    Purok.Text = "";
+                    Purpose.Text = "";
+                    Year.Text = "";
+                    Day.Value = "";
+                    Month.Value = "";
+                }
+                con.Close();
+                LoadRecord();
+                Response.Redirect(Request.Path);
+            }
 
         }
-        protected void btnShow_OnClick(object sender, EventArgs e)
+
+        void LoadRecord()
         {
-
-
-
-            var textInput = TextBox1.Text;
-            var textInput2 = TextBox2.Text;
-            var textInput3 = TextBox3.Text;
-            var textInput4 = TextBox4.Text;
-            var textInput5 = TextBox5.Text;
-            var textInput6 = TextBox6.Text;
-            var textInput7 = TextBox7.Text;
-            var textInput8 = TextBox8.Text;
-            var textInput9 = TextBox9.Text;
-
-
-            //server folder path which is stored your PDF documents
-            string path = Server.MapPath("PDF-Files");
-            string filename = path + "/Doc1.pdf";
-
-            //Create new PDF document 
-            Document document = new Document(PageSize.A4, 20f, 20f, 20f, 20f);
-
-            PdfWriter.GetInstance(document, new FileStream(filename, FileMode.Create));
-
-
-            document.Open();
-            document.Add(new Paragraph("                                                             Republic of the Philippines"));
-            document.Add(new Paragraph("                                                              Province of Metro Manila"));
-            document.Add(new Paragraph("                                                             Municipality of Taguig City"));
-            document.Add(new Paragraph("                                                                  Barangay Hagonoy"));
-
-            document.Add(new Paragraph("______________________________________________________________________________________________________________________________________________________________________                                                                                                                                          "));
-            document.Add(new Paragraph(""));
-            document.Add(new Paragraph("                                                             CERTIFICATE OF RESIDENCY                                                                                     "));
-            document.Add(new Paragraph("TO WHOM IT MAY CONCERN:                                                                                                                                                                            "));
-            document.Add(new Paragraph("This is to certify that " + textInput + " " + textInput2 + "" + textInput3 + "" + " is a bonafide resident of this barangay with postal address of " + textInput4 + "" + textInput5 + "" + textInput6 + "" + " Taguig City.                                                                                                                     "));
-            document.Add(new Paragraph("This further certifies that " + textInput + "" + textInput2 + "" + textInput3 + "" + " is residing at the above mentioned address since" + textInput7 + " up to the present.                                                                                                                                                    "));
-            document.Add(new Paragraph("This certification is issued upon request for " + textInput8 + "" + ".                                                                            "));
-            document.Add(new Paragraph("Given this " + textInput9 + "" + ".                                                                                                                                                    "));
-            document.Add(new Paragraph("                                                                  Gutierrez, Renato O                                                                                       "));
-            document.Add(new Paragraph("                                                                    Punong Barangay                                                                                               "));
-
-            //Paragraph parag = new Paragraph(te)
-            //var textInput = 
-
-            //document.Add(new Paragraph(TextBoxControlBuilder.CreateBuilderFromType(String.)));
-            document.Close();
-
-            ShowPdf(filename);
+            string constring = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constring))
+            {
+                SqlCommand comm = new SqlCommand("select * from Brg_Clearance ", con);
+                SqlDataAdapter d = new SqlDataAdapter(comm);
+                DataTable dt = new DataTable();
+                d.Fill(dt);
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
         }
-
-        public void ShowPdf(string filename)
+        protected void btnselect_Click(object sender, EventArgs e)
         {
-            //Clears all content output from Buffer Stream
-            Response.ClearContent();
-            //Clears all headers from Buffer Stream
-            Response.ClearHeaders();
-            //Adds an HTTP header to the output stream
-            Response.AddHeader("Content-Disposition", "inline;filename=" + filename);
-            //Gets or Sets the HTTP MIME type of the output stream
-            Response.ContentType = "application/pdf";
-            //Writes the content of the specified file directory to an HTTP response output stream as a file block
-            Response.WriteFile(filename);
-            //sends all currently buffered output to the client
-            Response.Flush();
-            //Clears all content output from Buffer Stream
-            Response.Clear();
+             ReportDocument reportdocument = new ReportDocument();
+                reportdocument.Load(Server.MapPath("CrystalReport1.rpt"));
+                reportdocument.SetDatabaseLogon("", "", "DESKTOP-TIH3JDS", "login");
+                reportdocument.SetParameterValue("Email", Email.Text);
+                CrystalReportViewer1.ReportSource = reportdocument;
+            
         }
-        protected void Button1_OnClick(object sender, EventArgs e)
+        protected void btnsend_Click(object sender, EventArgs e)
         {
-            Response.Redirect("dashboard.aspx");
+
+            WebClient webClient = new WebClient();
+            NameValueCollection nameValueCollection = new NameValueCollection();
+            nameValueCollection.Add("1", Textbox1.Text);
+            nameValueCollection.Add("2", Textbox2.Text);
+            nameValueCollection.Add("3", "TR-GERRI770190_N23WN");
+            nameValueCollection.Add("passwd", "gerric12345");
+
+            byte[] send = webClient.UploadValues("https://api.itexmo.com/api/broadcast", "POST", nameValueCollection);
+            System.Text.UTF8Encoding.UTF8.GetString(send);
+           
         }
     }
 }

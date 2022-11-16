@@ -4,22 +4,22 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
     <title>Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+        rel="stylesheet"/>
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
      <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -36,7 +36,7 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuVyZWwqTq86AJctzNQmhb2hmUt5M7tQE"></script>
-
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script type="text/javascript">
   
     window.onload = function () {
@@ -65,6 +65,7 @@
                 title: data.title
 
             });
+
             (function (markers, data) {
                 google.maps.event.addListener(marker, "click", function (e) {
                     infoWindow.setContent(data.description);
@@ -76,12 +77,15 @@
                 });
             
             })(markers, data);
+
         }
+
     }
 </script>
 
 </head>
-    <form >
+<body id="page-top" >
+    <form id="form1" runat="server">
         <div id="wrapper">
 
             <!-- Sidebar -->
@@ -118,7 +122,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
+                        <i class="fas fa-fw fa-address-book"></i>
                         <span>Residents</span>
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -134,7 +138,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-wrench"></i>
+                        <i class="fas fa-fw fa-file"></i>
                         <span>Certificates</span>
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -146,22 +150,31 @@
                             <a class="collapse-item" href="utilities-animation.html">CEDULA</a>
                         </div>
                     </div>
+                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse"
+                       aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-male"></i>
+                        <span>Manage Roles</span>
+                    </a>
+                    <div id="collapse" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Roles:</h6>
+                            <a class="collapse-item" href="ManageRoles.aspx">Super Admin</a>
+                            <a class="collapse-item" href="barangaycertificates.aspx">Admin 1</a>
+                            <a class="collapse-item" href="utilities-animation.html">Admin 2</a>
+                        </div>
+                    </div>
                 </li>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
 
-                <!-- Nav Item - Pages Collapse Menu -->
-                </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link" href="Command.aspx">
+                    <a class="nav-link" href="Hotspot.aspx">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Command center</span>
+                        <span>Hotspot Area</span>
                     </a>
                 </li>
 
@@ -170,6 +183,24 @@
                     <a class="nav-link" href="blotter.aspx">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Blotter</span>
+                    </a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="blotter.aspx">
+                        <i class="fas fa-fw fa-calendar"></i>
+                        <span>Calendar</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="blotter.aspx">
+                        <i class="fas fa-fw fa-clipboard-list"></i>
+                        <span>Surveys</span>
+                    </a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="blotter.aspx">
+                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
+                        <span>Revenue</span>
                     </a>
                 </li>
 
@@ -206,10 +237,7 @@
 
                             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                             <li class="nav-item dropdown no-arrow d-sm-none">
-                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-search fa-fw"></i>
-                                </a>
+                            
                                 <!-- Dropdown - Messages -->
                                 <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                      aria-labelledby="searchDropdown">
@@ -217,7 +245,7 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control bg-light border-0 small"
                                                    placeholder="Search for..." aria-label="Search"
-                                                   aria-describedby="basic-addon2">
+                                                   aria-describedby="basic-addon2"/>
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button">
                                                     <i class="fas fa-search fa-sm"></i>
@@ -230,7 +258,36 @@
 
                             <!-- Nav Item - Alerts -->
 
-
+                      <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     <img class="img-profile rounded-circle"
+                                         src="img/undraw_profile.svg" style="padding-right:5px;">
+                                     <asp:Label ID="lb1" runat="server" Text="Label"></asp:Label>  
+                                   
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Settings
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Activity Log
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
                           
                     </nav>
                     <!-- End of Topbar -->
@@ -241,8 +298,6 @@
 
                         <!-- Content Row -->
                         <div class="row">
-
-                            <!-- Earnings (Monthly) Card Example -->
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
@@ -260,8 +315,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Earnings (Monthly) Card Example -->
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
@@ -327,13 +380,12 @@
                             <!-- Card Header - Dropdown -->
                             <!-- Card Body -->
                             <div class="card-body">
-<body id="page-top" >
-<form id="form1" runat="server">
 
-<br />
+
+<br class="col-xl-3 col-md-6 mb-4"/>
 Search :
-<asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
-<asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" class="btn btn-primary rounded-0" />
+<asp:TextBox ID="txtSearch" runat="server" placeholder="Search Location..." CssClass="p"></asp:TextBox>
+<asp:Button ID="btnSearch" runat="server" text="Search" OnClick="btnSearch_Click" CssClass="btn btn-info p-1 "/>
  <br /> 
 <br />
 <div id="dvMap" style="width: 1200px; height: 500px">
@@ -357,171 +409,7 @@ Search :
 ];
 </script>
    <!-- Content Row -->
-                        <div class="row">
-
-                            <!-- Content Column -->
-                            <div class="col-lg-6 mb-4">
-
-                                <!-- Project Card Example -->
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <h4 class="small font-weight-bold">
-                                            Server Migration <span class="float-right">20%</span>
-                                        </h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold">
-                                            Sales Tracking <span class="float-right">40%</span>
-                                        </h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold">
-                                            Customer Database <span class="float-right">60%</span>
-                                        </h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar" role="progressbar" style="width: 60%"
-                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold">
-                                            Payout Details <span class="float-right">80%</span>
-                                        </h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                                 aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold">
-                                            Account Setup <span class="float-right">Complete!</span>
-                                        </h4>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Color System -->
-                                <div class="row">
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-primary text-white shadow">
-                                            <div class="card-body">
-                                                Primary
-                                                <div class="text-white-50 small">#4e73df</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-success text-white shadow">
-                                            <div class="card-body">
-                                                Success
-                                                <div class="text-white-50 small">#1cc88a</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-info text-white shadow">
-                                            <div class="card-body">
-                                                Info
-                                                <div class="text-white-50 small">#36b9cc</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-warning text-white shadow">
-                                            <div class="card-body">
-                                                Warning
-                                                <div class="text-white-50 small">#f6c23e</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-danger text-white shadow">
-                                            <div class="card-body">
-                                                Danger
-                                                <div class="text-white-50 small">#e74a3b</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-secondary text-white shadow">
-                                            <div class="card-body">
-                                                Secondary
-                                                <div class="text-white-50 small">#858796</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-light text-black shadow">
-                                            <div class="card-body">
-                                                Light
-                                                <div class="text-black-50 small">#f8f9fc</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-dark text-white shadow">
-                                            <div class="card-body">
-                                                Dark
-                                                <div class="text-white-50 small">#5a5c69</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-lg-6 mb-4">
-
-                                <!-- Illustrations -->
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                                 src="img/undraw_posting_photo.svg" alt="...">
-                                        </div>
-                                        <p>
-                                            Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                            constantly updated collection of beautiful svg images that you can use
-                                            completely free and without attribution!
-                                        </p>
-                                        <a target="_blank" rel="nofollow" href="https://undraw.co/">
-                                            Browse Illustrations on
-                                            unDraw &rarr;
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <!-- Approach -->
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>
-                                            SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                            CSS bloat and poor page performance. Custom CSS classes are used to create
-                                            custom components and custom utility classes.
-                                        </p>
-                                        <p class="mb-0">
-                                            Before working with this theme, you should become familiar with the
-                                            Bootstrap framework, especially the utility classes.
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
+                      
                     <!-- /.container-fluid -->
 
                 </div>
@@ -559,8 +447,8 @@ Search :
                     </div>
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="index.aspx">Logout</a>
                     </div>
                 </div>
             </div>
