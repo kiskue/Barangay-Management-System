@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">`
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -16,13 +16,13 @@
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
-
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width" />
     <title>Location</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuVyZWwqTq86AJctzNQmhb2hmUt5M7tQE&libraries=places&v=weekly"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuVyZWwqTq86AJctzNQmhb2hmUt5M7tQE&callback=initMap&v=weekly"></script>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <script src="scripts/jquery-3.6.0.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
@@ -80,8 +80,8 @@ background: #fff;
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.aspx">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-bg-logo"></i>
+                    <div class="sidebar-brand-icon ">
+                       <img src="hagonoy.jpg"  width="40"  height="40" />
                     </div>
                     <div class="sidebar-brand-text mx-3">Barangay Hagonoy<sup></sup></div>
                 </a>
@@ -91,9 +91,9 @@ background: #fff;
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="/Home/Dashboard">
+                    <a class="nav-link" href="dashboard.aspx">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Home</span>
+                        <span>Dashboard</span>
                     </a>
                 </li>
 
@@ -102,21 +102,21 @@ background: #fff;
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Request
+                    Interface
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Permits</span>
+                        <i class="fas fa-fw fa-address-book"></i>
+                        <span>Residents</span>
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Resident of Barangay:</h6>
-                            <a class="collapse-item" href="/Home/Location">Add Residents</a>
-                            <a class="collapse-item" href="cards.html">Resident list</a>
+                            <a class="collapse-item" href="/Home/Location">Residents</a>
+                     
                         </div>
                     </div>
                 </li>
@@ -125,48 +125,73 @@ background: #fff;
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-wrench"></i>
+                        <i class="fas fa-fw fa-file"></i>
                         <span>Certificates</span>
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Certificates:</h6>
-                            <a class="collapse-item" href="/UserDash/Certificate">Barangay Clearance</a>
-                            <a class="collapse-item" href="utilities-border.html">Barangay Indigency</a>
+                            <a class="collapse-item" href="barangaycertificates.aspx">Barangay Clearance</a>
+                            <a class="collapse-item" href="barangaycertificates.aspx">Barangay Indigency</a>
                             <a class="collapse-item" href="utilities-animation.html">CEDULA</a>
                         </div>
                     </div>
+                   
+                    
                 </li>
-
+              
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitie"
+                       aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-file"></i>
+                        <span>Permits</span>
+                    </a>
+                    <div id="collapseUtilitie" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Permits:</h6>
+                            <a class="collapse-item" href="barangaycertificates.aspx">Business Permits</a>
+                            <a class="collapse-item" href="barangaycertificates.aspx">Building permits</a>
+                           
+                        </div>
+                    </div>
+                   
+                    
+                </li>
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                       aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Pages</span>
+                   <li class="nav-item">
+                    <a class="nav-link" href="BarangayOfficials.aspx">
+                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
+                        <span>Sanguniang Barangay</span>
                     </a>
-                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Login Screens:</h6>
-                            <a class="collapse-item" href="login.html">Login</a>
-                            <a class="collapse-item" href="register.html">Register</a>
-                            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Other Pages:</h6>
-                            <a class="collapse-item" href="404.html">404 Page</a>
-                            <a class="collapse-item" href="blank.html">Blank Page</a>
-                        </div>
-                    </div>
                 </li>
+
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="Hotspot.aspx">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Hotspot Area</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="blotter.aspx">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Blotter</span>
+                    </a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="blotter.aspx">
+                        <i class="fas fa-fw fa-calendar"></i>
+                        <span>Calendar</span>
+                    </a>
+                </li>
+              
+              
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
@@ -227,7 +252,7 @@ background: #fff;
                                             <div class="form-group">
                                                 <label>Name:</label>
                                                  <asp:Textbox runat="server" type="text" class="form-control" placeholder="Name"  id="Name" />
-
+                                                <asp:Label ID="IDL" runat="server" Visible="false"/>
                                             </div>
                                         </div>
                                         <div class="col-sm-4 col-md-3 col-xs-12">
@@ -332,50 +357,13 @@ background: #fff;
                                 </div>
                                                                      <div class="card-body">  
                     <asp:Button Text="submit" ID="Button2" CssClass="btn btn-primary btn-user btn-block" style="width:100px; float:right;" runat="server" Onclick="btnSave_Click"  />
-                    <button style="margin-bottom:10px;" type="button" data-target="#myMap" data-toggle="modal" class="btn btn-danger btn-sm rounded-0"><i class="fa fa-plus-circle"></i> Send SMS Message</button>  
+                   
   
-                    <div class="modal fade" id="myMap" style="width:500px; align-content:center;">  
-                        <div class="modal-dialog modal-lg">  
-                            <div class="modal-content form-row justify-content-center ">  
-                                <div class="modal-header">  
-                                    <h4 class="modal-title">Send SMS Message</h4>  
-                                    <button type="button" class="close" data-dismiss="modal">×</button>  
-                                </div>  
-                                <div class="modal-body ">  
-                                       <div class="col-sm-4 col-md-4 col-xs-12">  
-                                            <div class="form-group">
-                                                <label>Number:</label>
-                                              <asp:Textbox runat="server" type="text" class="form-control" placeholder="Purok"  id="Textbox1" />
-                                            </div>
-                                        </div>
-                                    
-                                         <div class="col-sm-12 col-md-12 col-xs-12">
-                                            <div class="form-group "rows="5" >
-                                                <label>Message:</label>
-                                                <asp:Textbox runat="server" type="text" class="form-control" placeholder="Purpose" id="Textbox2" />
-                                            </div>
-                                        </div>                            
-                                </div>  
-                                <div class="modal-footer">  
-                                    
-                                    <button ID="Button3" class="btn btn-primary rounded-0" runat="server" Onclick="btnsend_Click">Submit</button>  
-                                </div>  
-                            </div>  
-                        </div>  
-                    </div>  
-                  
-                </div>  
-            </div>  
-                        
+               
+                        </div>
                       
                             
 
-                                </div>
-
-
-
-
-                            </div>
                 
                              <div class="col-ml-2 col-md-15 col-xs-20">
                      

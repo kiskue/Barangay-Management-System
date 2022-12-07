@@ -14,7 +14,7 @@ namespace BMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lb1.Text = "<b><font color=black>" + "Welcome : " + "</font>" + "<b><font color=blue>" + Session["Username"] + "</font>";
             if (!this.IsPostBack)
             {
                 string constr = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -109,8 +109,9 @@ namespace BMS
 
 
                 }
+ 
                 con.Close();
-
+                
             }
         }
 

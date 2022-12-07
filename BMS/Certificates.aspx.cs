@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Web.Security;
 
 namespace BMS
 {
@@ -14,11 +15,46 @@ namespace BMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
-                LoadRecord();
+                BindGridView();
             }
+            if (!this.Page.User.Identity.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+            }
+          
+            Year.Attributes.Add("readonly", "readonly");
+            Name.Attributes.Add("readonly", "readonly");
+            Email.Attributes.Add("readonly", "readonly");
+            Number.Attributes.Add("readonly", "readonly");
+            Address.Attributes.Add("readonly", "readonly");
+           
             lb1.Text = "<font color=black>" + "Welcome : " + "</font>" + "<font color=blue>" + Session["FirstName"] + "</font>";
+            if (!this.IsPostBack)
+            {
+                string constr = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("SELECT FullName,Email,Address,Number FROM UserM WHERE Email = '" + Session["FirstName"].ToString() + "'"))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection = con;
+                        con.Open();
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            sdr.Read();
+                            Name.Text = sdr["FullName"].ToString();
+                            Email.Text = sdr["Email"].ToString();
+                            Number.Text = sdr["Number"].ToString();
+                            Address.Text = sdr["Address"].ToString();
+
+                        }
+                        con.Close();
+                    }
+                }
+            }
         }
        
         protected void btnSave_Click(object sender, EventArgs e)
@@ -26,10 +62,12 @@ namespace BMS
            
 
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(CS))
-                {
+
+
+            using (SqlConnection con = new SqlConnection(CS))
+            {
                 con.Open();
-                SqlCommand commandToCheckEmail = new SqlCommand("select Email from Brg_Clearance where Email='" +Email.Text +"'", con);
+                SqlCommand commandToCheckEmail = new SqlCommand("select Email from Brg_Clearance where Email='" + Email.Text + "'", con);
                 string pid = (string)commandToCheckEmail.ExecuteScalar();
                 con.Close();
                 if (pid == Email.Text)
@@ -42,15 +80,15 @@ namespace BMS
                 {
                     SqlCommand cmd = new SqlCommand("AddCertificates", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Name", Name.Text);
+                    cmd.Parameters.AddWithValue("@FullName", Name.Text);
                     cmd.Parameters.AddWithValue("@Email", Email.Text);
                     cmd.Parameters.AddWithValue("@Number", Number.Text);
-                    cmd.Parameters.AddWithValue("@StreetNum", StreetNum.Text);
-                    cmd.Parameters.AddWithValue("@Purok", Purok.Text);
+                    cmd.Parameters.AddWithValue("@Address", Address.Text);
                     cmd.Parameters.AddWithValue("@Purpose", Purpose.Text);
-                    cmd.Parameters.AddWithValue("@Year", Year.Text);
-                    cmd.Parameters.AddWithValue("@Day", Day.Value);
-                    cmd.Parameters.AddWithValue("@Month", Month.Value);
+                    cmd.Parameters.AddWithValue("@Date", Year.Text);
+                    cmd.Parameters.AddWithValue("@Indigency", indigency.Text);
+                    cmd.Parameters.AddWithValue("@Pending", pending.Text);
+
                     con.Open();
                     int k = cmd.ExecuteNonQuery();
                     if (k != 0)
@@ -63,24 +101,21 @@ namespace BMS
                         Email.Text = "";
                         Email.Text = "";
                         Number.Text = "";
-                        StreetNum.Text = "";
-                        Purok.Text = "";
+                        Address.Text = "";
                         Purpose.Text = "";
                         Year.Text = "";
-                        Day.Value = "";
-                        Month.Value = "";
+
                     }
                     con.Close();
-                    LoadRecord();
-                    Response.Redirect(Request.Path);
+                    BindGridView();
                 }
-                
             }
-
         }
-        void LoadRecord()
+        private void BindGridView()
         {
             string constring = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+
+
             using (SqlConnection con = new SqlConnection(constring))
             {
                 SqlCommand comm = new SqlCommand("select * from Brg_Clearance where Email='" + Session["FirstName"].ToString() + "'", con);
@@ -91,6 +126,6 @@ namespace BMS
                 GridView1.DataBind();
             }
         }
-       
+
     }
 }

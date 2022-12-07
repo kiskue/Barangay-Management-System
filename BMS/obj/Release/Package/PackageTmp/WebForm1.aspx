@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="BMS.WebForm1" %>
-<%@ Register assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" namespace="CrystalDecisions.Web" tagprefix="CR" %>
+
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,18 +26,18 @@
      <script>
 
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
+         function getLocation() {
+             if (navigator.geolocation) {
+                 navigator.geolocation.getCurrentPosition(showPosition);
+             } else {
+                 x.innerHTML = "Geolocation is not supported by this browser.";
+             }
+         }
 
-        function showPosition(position) {
-            document.getElementById("lat").value = position.coords.latitude;
-            document.getElementById("lng").value = position.coords.longitude;
-        }
+         function showPosition(position) {
+             document.getElementById("lat").value = position.coords.latitude;
+             document.getElementById("lng").value = position.coords.longitude;
+         }
      </script>
 
 
@@ -49,6 +51,7 @@
             background-image: url(background.jfif);
             background-size: cover;
         }
+
     </style>
 </head>
 <body class="bg-background">
@@ -69,44 +72,44 @@
                             <div class="col-lg-4 col-lg-offset-4">
                                 <div class="form-group">
                                     <label>Name:</label>
-                                    <asp:Textbox runat="server" type="text" class="form-control" placeholder="Recidence Name" name="Name" ID="name" />
+                                    <asp:Textbox runat="server" type="text" class="form-control" placeholder="Recidence Name" name="Name" ID="name" required="Please fill up" />
                                 </div>
                             </div>
                             <div class="col-sm-4 col-md-3 col-xs-12">
                                 <div class="form-group">
                                     <label>Latitude:</label>
-                                    <asp:Textbox runat="server" type="text" class="form-control" placeholder="lat" name="Latitude" id="lat" />
+                                    <asp:Textbox runat="server" type="text" class="form-control" placeholder="lat" name="Latitude" id="lat" required="Please fill up" />
 
                                 </div>
                             </div>
                             <div class="col-sm-4 col-md-3 col-xs-12">
                                 <div class="form-group">
                                     <label>Longitude:</label>
-                                    <asp:Textbox runat="server" type="text" class="form-control" placeholder="lng" name="Longitude" id="lng" />
+                                    <asp:Textbox runat="server" type="text" class="form-control" placeholder="lng" name="Longitude" id="lng" required="Please fill up" />
                                 </div>
                             </div>
                             <div class="col-lg-4 col-lg-offset-4">
                                 <div class="form-group">
                                     <label>Landmark:</label>
-                                    <asp:Textbox runat="server" type="text" class="form-control" placeholder="Address" name="Landmark" id="landmark" />
+                                    <asp:Textbox runat="server" type="text" class="form-control" placeholder="Address" name="Landmark" id="landmark" required="Please fill up"/>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-md-3 col-xs-12">
                                 <div class="form-group">
                                     <label>Incident Report:</label>
-                                    <asp:Textbox runat="server" type="text" class="form-control" placeholder="Occupation" name="IncidentReport" id="report" />
+                                    <asp:Textbox runat="server" type="text" class="form-control" placeholder="Occupation" name="IncidentReport" id="report" required="Please fill up"/>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-md-3 col-xs-12">
                                 <div class="form-group">
                                     <label>Contact Number:</label>
-                                    <asp:Textbox runat="server" type="text" class="form-control" placeholder="Contact Number" name="Contact" id="contact" />
+                                    <asp:Textbox runat="server" type="text" class="form-control" placeholder="Contact Number" name="Contact" id="contact" required="Please fill up"/>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-md-3 col-xs-12">
                                 <div class="form-group">
                                     <label for="place">Choose a Place:</label>
-                                    <select runat="server" id="place" name="Place">
+                                    <select runat="server" id="place" name="Place" required="Please fill up">
                                         <option value="Dreamlad">Dreamland</option>
                                         <option value="Pag-asa">Pag-asa</option>
                                         <option value="SeaBrezz">SeaBrezz</option>
@@ -119,25 +122,25 @@
                             <div class="col-sm-4 col-md-3 col-xs-12">
                                 <div class="form-group">
                                     <label for="appt">Select a time:</label>
-                                    <asp:Textbox runat="server" type="time" id="time" name="Time" />
+                                    <asp:Textbox runat="server" type="time" id="time" name="Time" required="Please fill up" />
                                 </div>
                             </div>
                             <div class="col-lg-4 col-lg-offset-4">
                                 <div class="form-group">
                                     <label for="birthday">Date:</label>
-                                    <asp:Textbox runat="server" type="date" id="date" name="Date" />
+                                    <asp:Textbox runat="server" type="date" id="date" name="Date" required="Please fill up" />
                                 </div>
                             </div>
                             <p>Click the button to get your coordinates.</p>
 
-                            <button onclick="getLocation()" class="btn btn-info " style="margin-left:10px; height:30px; font-size:12px;">CLICK</button>
+                            <button onclick="getLocation()" class="btn btn-info " style="margin-left:10px; height:30px; font-size:12px; ">CLICK</button>
 
                         </div>
                     </div>
                     <div class="modal-footer">
                          <asp:Label ID="Lbl1" runat="server" Text=""></asp:Label>
 
-                 <asp:Button Text="submit" ID="Button2" CssClass="btn btn-primary btn-user btn-block" style="width:100px;" runat="server"   />
+                 <asp:Button Text="submit" ID="Button2" CssClass="btn btn-primary btn-user btn-block" style="width:100px;" runat="server"  Onclick="btnSave_Click" />
 
 
                        
@@ -153,6 +156,7 @@
                        
                 
             <!-- Outer Row -->
+    
             <div class="row justify-content-center">
 
                 <div class="col-xl-7 col-lg-12 col-md-9">
@@ -171,39 +175,25 @@
                                         </div>
                                         <div class="user" style="margin-top:40px;">
                                             <div class="form-group">
-
-                                                <asp:TextBox runat="server" ID="txtUsername" CssClass="form-control form-control-user"
-                                                    placeholder="Enter Username..." />
-                                               
-                                            </div>
-                                            <div class="form-group">
-
-                                                <asp:TextBox runat="server" ID="txtpassword" TextMode="Password" CssClass="form-control form-control-user"
-                                                    placeholder="Enter Password..." />
-                                               
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox small">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck"/>
-                                                    <label class="custom-control-label" for="customCheck">
-                                                        Remember
-                                                    Me</label>
-                                                </div>
-                                            </div>
-                                            
-                                            <asp:Button Text="login" ID="btnlogin" CssClass="btn btn-primary btn-user btn-block" runat="server" />
-                                            
-                                            <br />
-                                            <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="false" runat="server" />
+                                           
+                                                    
+<a href="Index.aspx">
+   <asp:image id="img" runat="server" imageurl="residents.png" style="width:100px; height:100px; margin-right:50px; margin-left:40px;"/>
+</a>
+                              
+<a href="/Register">
+   <asp:image id="Image1" runat="server" imageurl="resident.png" style="width:100px; height:100px; "/>
+</a>
+<div  >
+    <H6 style="margin-left:65px; text-align:left;float:left; ">ADMIN</H6> <h6 style="text-align:left;float:right; margin-right:65px;">USER</h6>
+    </div>
 
                                             <br />
                                             
                                         </div>
                                         <hr/>
                                        
-                                        <div class="text-center">
-                                            <a class="small" href="/Register">Create an Account!</a>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

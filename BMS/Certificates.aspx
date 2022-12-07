@@ -44,6 +44,21 @@
     <script src="scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="bootstrap.min.css" rel="stylesheet" />
+    <script>
+        function join(t, a, s) {
+            function format(m) {
+                let f = new Intl.DateTimeFormat('en', m);
+                return f.format(t);
+            }
+            return a.map(format).join(s);
+        }
+
+        let a = [{ day: 'numeric' }, { month: 'long' }, { year: 'numeric' }];
+        let s = join(new Date, a, '-');
+        window.onload = function () {
+            document.getElementById("Year").value = s;
+        }
+    </script>
 <style>
 body {
 width: 100%;
@@ -75,7 +90,7 @@ background: #fff;
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.aspx">
@@ -90,7 +105,7 @@ background: #fff;
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="/Home/Dashboard">
+                    <a class="nav-link" href="/UserDash/Index">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Home</span>
                     </a>
@@ -108,14 +123,14 @@ background: #fff;
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
+                      <i class="fas fa-fw fa-file"></i>
                         <span>Permits</span>
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Resident of Barangay:</h6>
-                            <a class="collapse-item" href="/Home/Location">Add Residents</a>
-                            <a class="collapse-item" href="cards.html">Resident list</a>
+                            <a class="collapse-item" href="Business.aspx">Business</a>
+                            <a class="collapse-item" href="Building.aspx">Building</a>
                         </div>
                     </div>
                 </li>
@@ -124,15 +139,15 @@ background: #fff;
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-wrench"></i>
+                        <i class="fas fa-fw fa-file"></i>
                         <span>Certificates</span>
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Certificates:</h6>
-                            <a class="collapse-item" href="/UserDash/Certificate">Barangay Clearance</a>
-                            <a class="collapse-item" href="utilities-border.html">Barangay Indigency</a>
+                            <a class="collapse-item" href="Certificates.aspx">Barangay Clearance</a>
+                            <a class="collapse-item" href="Indigency.aspx">Barangay Indigency</a>
                             <a class="collapse-item" href="utilities-animation.html">CEDULA</a>
                         </div>
                     </div>
@@ -140,39 +155,28 @@ background: #fff;
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                       aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Pages</span>
+                    <a class="nav-link" href="WebForm1.aspx">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Report Incident</span>
                     </a>
-                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Login Screens:</h6>
-                            <a class="collapse-item" href="login.html">Login</a>
-                            <a class="collapse-item" href="register.html">Register</a>
-                            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Other Pages:</h6>
-                            <a class="collapse-item" href="404.html">404 Page</a>
-                            <a class="collapse-item" href="blank.html">Blank Page</a>
-                        </div>
-                    </div>
                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="UserProfile.aspx">
+                        <i class="fas fa-fw fa-address-book"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="Activitylog.aspx">
+                        <i class="fas fa-fw fa-list-alt"></i>
+                        <span>Activity log</span>
+                    </a>
+                </li>
+                <!-- Heading -->
+              
                 <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
-
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
+              
 
                 <!-- Sidebar Message -->
 
@@ -210,18 +214,7 @@ background: #fff;
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
-                                    </a>
+                                   
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -242,10 +235,10 @@ background: #fff;
                     <div class="col-ml-2 col-md-15 col-xs-20">
                      
                             <div class="container py-4">
-                                <h5 class="text-center">Report Incident</h5>
+                             
                                 <div class="card">
-                                    <div class="card-header bg-danger">
-                                        <h6 class="card-title text-uppercase text-white">BARANGAY HAGONOY</h6>
+                                    <div class="card-header bg-primary">
+                                        <h6 class="card-title text-uppercase text-white">BARANGAY CLEARANCE</h6>
                                     </div>
 
                                     <div class="form-row justify-content-center" style="padding:15px 15px 15px 15px;">
@@ -269,16 +262,10 @@ background: #fff;
                                                  <asp:Textbox runat="server" type="text" class="form-control" placeholder="Contact Number"  id="Number" />
                                             </div>
                                         </div>
-                                      <div class="col-lg-4 col-lg-offset-4">
+                                          <div class="col-lg-4 col-lg-offset-4">
                                             <div class="form-group">
-                                                <label>House No. / Street:</label>
-                                                 <asp:Textbox runat="server" type="text" class="form-control" placeholder="House No. and Street"  id="StreetNum" />
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-xs-12">
-                                            <div class="form-group">
-                                                <label>Purok:</label>
-                                              <asp:Textbox runat="server" type="text" class="form-control" placeholder="Purok"  id="Purok" />
+                                                <label>Address:</label>
+                                              <asp:Textbox runat="server" type="text" class="form-control" placeholder="Complete Address"  id="Address" />
                                             </div>
                                         </div>
                                         <div class="col-sm-4 col-md-3 col-xs-12">
@@ -290,68 +277,24 @@ background: #fff;
                                       <div class="col-sm-4 col-md-3 col-xs-12">
                                             <div class="form-group">
                                                 <label>Year:</label>
-                                                <asp:Textbox runat="server" type="month" id="Year"  />
+                                                <asp:Textbox runat="server" class="form-control" type="text" id="Year"   />
+                                            </div>
+                                        </div>
+                                               <div class="col-sm-4 col-md-3 col-xs-12">
+                                            <div class="form-group">
+                                          
+                                                <asp:Textbox runat="server" class="form-control" type="text" value="Barangay Clearance" id="indigency" hidden="true"  />
+                                            </div>
+                                        </div>
+                                         <div class="col-sm-4 col-md-3 col-xs-12">
+                                            <div class="form-group">
+                                          
+                                                <asp:Textbox runat="server" class="form-control" type="text" value="Pending......" id="pending" hidden="true"  />
                                             </div>
                                         </div>
                                             
-                                        <div class="col-sm-4 col-md-3 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="place">Choose a Day:</label>
-                                                <select runat="server" id="Day" required="Please fill up">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
-                                                    <option value="13">13</option>
-                                                    <option value="14">14</option>
-                                                    <option value="15">15</option>
-                                                    <option value="16">16</option>
-                                                    <option value="17">17</option>
-                                                    <option value="18">18</option>
-                                                    <option value="19">19</option>
-                                                    <option value="20">20</option>
-                                                    <option value="21">21</option>
-                                                    <option value="22">22</option>
-                                                    <option value="23">23</option>
-                                                    <option value="24">24</option>
-                                                    <option value="25">25</option>
-                                                    <option value="26">26</option>
-                                                    <option value="27">27</option>
-                                                    <option value="28">28</option>
-                                                    <option value="29">29</option>
-                                                    <option value="30">30</option>
-                                                    <option value="31">31</option>
-                                                </select>
-                                           </div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="place">Choose a Month:</label>
-                                                <select runat="server" id="Month" required="Please fill up">
-                                                    <option value="January">January</option>
-                                                    <option value="Febraury">February</option>
-                                                    <option value="March">March</option>
-                                                    <option value="April">April</option>
-                                                    <option value="May">May</option>
-                                                    <option value="June">June</option>
-                                                    <option value="July">July</option>
-                                                    <option value="August">August</option>
-                                                    <option value="September">September</option>
-                                                    <option value="October">October</option>
-                                                    <option value="November">November</option>
-                                                    <option value="December">December</option>
-
-                                                </select>
-                                         </div>
-                                        </div>
+                                       
+                                        
                                      
                                     </div>
                                 </div>
@@ -362,31 +305,41 @@ background: #fff;
                                 </div>
 
 
+ <div class="container py-4">
+                                    
+                                    <div class="card">
+                                        <div class="card-header bg-primary">
+                                            <h6 class="card-title text-uppercase text-white">Requested Certificates</h6>
+                                      
+                                    </div> 
+                                    </div>
 
+           
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-condensed " 
+            ClientIDMode="Static">
+            <Columns >
+            
+                <asp:BoundField DataField="FullName" HeaderText="Name" />
+                 <asp:BoundField DataField="Indigency" HeaderText="Type" />
+                <asp:BoundField DataField="Date" HeaderText="Date Requested" />
+                <asp:BoundField DataField="Pending" HeaderText="Status" />
+            </Columns>
+        </asp:GridView>
 
-                            </div>
-                            <!-- Display geolocation data -->
-
-                         <div class="col-ml-2 col-md-15 col-xs-20">
-                     
-                            <div class="container py-4">
-                    <div class="card">
-                           
-                        <div class="form-row justify-content-center" style="padding:15px 15px 15px 15px; margin-top:20px">
-                         <asp:GridView ID="GridView1" runat="server"  UseAccessibleHeader="true" CssClass="table table-condensed table-hover " Width="1200px"  >
-
-
-
-                         </asp:GridView>
-
+                       
                         </div>
-                         </div>
-                        
-                    </div>
+                      
+                           </div>
+                   
                 </div>
-            </div>
+                      
+                           </div>
+                   
 
-        </div>
+                            <!-- Display geolocation data -->
+                             
+                       
+            
 
             
      
@@ -412,9 +365,7 @@ background: #fff;
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
-
-
-
+                        <a class="btn btn-primary" href="/Register/Login">Logout</a>
                     </div>
                 </div>
             </div>

@@ -115,3 +115,5 @@ D:\Barangay Management System\Barangay-Management-System\Barangay-Management-Sys
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\obj\Release\BMS.csproj.CopyComplete
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\obj\Release\BMS.dll
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\obj\Release\BMS.pdb
+D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\log4net.dll
+D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\log4net.xml

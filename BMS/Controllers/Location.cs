@@ -23,5 +23,10 @@ namespace BMS.Controllers
         public string Sex { get; set; }
         public string Religion { get; set; }
         public string Status { get; set; }
+        public string Other { get; set; }
+        public string NationalId { get; set; }
+        public string Voter { get; set; }
+        public string Barangay { get; set; }
+
     }
 }

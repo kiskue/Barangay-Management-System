@@ -1,108 +1,170 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using QRCoder;
+using System.IO;
+using System.Drawing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using System.IO;
-
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
+using System.Web.Security;
+using CrystalDecisions.CrystalReports.Engine;
 namespace BMS
 {
     public partial class blotter : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!this.IsPostBack)
+            {
+                BindGridView();
+            }
         }
 
-        protected void Butoon2_Click1(object sender, EventArgs e)
+        protected void btnSave_Click(object sender, EventArgs e)
         {
-            var textInput = TextBox1.Text;
-            var textInput2 = TextBox2.Text;
-            var textInput3 = TextBox3.Text;
-            var textInput4 = TextBox4.Text;
-            var textInput5 = TextBox5.Text;
-            var textInput6 = TextBox6.Text;
-            var textInput7 = TextBox7.Text;
-            var textInput8 = TextBox8.Text;
-            var textInput9 = TextBox9.Text;
-            var textInput10 = TextBox10.Text;
-            var textInput11 = TextBox11.Text;
-            var textInput12 = TextBox12.Text;
-            var textInput13 = TextBox13.Text;
-            var textInput14 = TextBox14.Text;
 
 
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+              
+                    SqlCommand cmd = new SqlCommand("AddBlotter", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@FullName", Name.Text);
+                    cmd.Parameters.AddWithValue("@Email", Email.Text);
+                    cmd.Parameters.AddWithValue("@Number", Number.Text);
+           
 
-            //server folder path which is stored your PDF documents
-            string path = Server.MapPath("PDF-Files");
-            string filename = path + "/Doc1.pdf";
-
-            //Create new PDF document 
-            Document document = new Document(PageSize.A4, 20f, 20f, 20f, 20f);
-
-            PdfWriter.GetInstance(document, new FileStream(filename, FileMode.Create));
+                    con.Open();
+                    int k = cmd.ExecuteNonQuery();
+                    if (k != 0)
+                    {
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+           "swal('Thank you!', 'Blotter save successfully!', 'success')", true);
 
 
-            document.Open();
+                    Name.Text = "";
+                        Email.Text = "";
+                        Number.Text = "";
+                      
+                        Year.Text = "";
 
-            document.Add(new Paragraph("                                                             Republic of the Philippines"));
-            document.Add(new Paragraph("                                                              Province of Metro Manila"));
-            document.Add(new Paragraph("                                                             Municipality of Taguig City"));
-            document.Add(new Paragraph("                                                                  Barangay Hagonoy"));
+                    }
+                    con.Close();
+                BindGridView();
 
-            document.Add(new Paragraph("______________________________________________________________________________________________________________________________________________________________________                                                                                                                                          "));
-            document.Add(new Paragraph(""));
-            document.Add(new Paragraph("                                                             BLOTTER OF BARANGAY HAGONOY                                                                                    "));
-            document.Add(new Paragraph("                           Gutierrez, Renato O " + " " + textInput + "                                      "));
-            document.Add(new Paragraph("                            Punong Barangay                                                                                                                                                                           "));
-            document.Add(new Paragraph("                                                             OFFICE OF THE BARANGAY HAGONOY                                                                                "));
-            document.Add(new Paragraph(textInput2));
-            document.Add(new Paragraph("Complainant  " + "" + "For: " + "" + textInput11));
 
-            document.Add(new Paragraph(textInput13 + "" + textInput12));
-            document.Add(new Paragraph(textInput14 + "" + "                                                                                      Offender"));
+            }
 
-            document.Add(new Paragraph("Witness"));
-
-            document.Add(new Paragraph("______________________________________________________________________________________________________________________________________________________________________                                                                                                                                          "));
-            document.Add(new Paragraph("                                                             COMPLAINT                                                                                  "));
-            document.Add(new Paragraph("                                        COMPLAINANT respectfully state:                                                                           "));
-            document.Add(new Paragraph("1." + "" + textInput2 + "" + ", " + textInput3 + "" + "," + textInput4 + "" + textInput5 + "" + " and a resident of " + textInput6 + "" + textInput7 + "" + textInput8 + "" + textInput9 + "" + textInput10));
-            document.Add(new Paragraph("2. The Witnesses are: "));
-            document.Add(new Paragraph("(a)" + "" + textInput13 + ", " + textInput3 + "," + textInput4 + "" + textInput5 + " and a resident of " + textInput6 + "" + textInput7 + "" + textInput8 + "" + textInput9 + "" + textInput10));
-            document.Add(new Paragraph("(b) " + "" + textInput14 + ", " + textInput3 + "," + textInput4 + "" + textInput5 + " and a resident of " + textInput6 + "" + textInput7 + "" + textInput8 + "" + textInput9 + "" + textInput10));
-            document.Add(new Paragraph("Narrative Report: "));
-            document.Add(new Paragraph("(a) On " + textInput9 + "" + "around " + "" + textInput + "" + textInput2 + "" + textInput13));
-            //Paragraph parag = new Paragraph(te)
-            //var textInput = 
-
-            //document.Add(new Paragraph(TextBoxControlBuilder.CreateBuilderFromType(String.)));
-            document.Close();
-
-            ShowPdf(filename);
         }
-
-        public void ShowPdf(string filename)
+        protected void Edit(object sender, EventArgs e)
         {
-            //Clears all content output from Buffer Stream
-            Response.ClearContent();
-            //Clears all headers from Buffer Stream
-            Response.ClearHeaders();
-            //Adds an HTTP header to the output stream
-            Response.AddHeader("Content-Disposition", "inline;filename=" + filename);
-            //Gets or Sets the HTTP MIME type of the output stream
-            Response.ContentType = "application/pdf";
-            //Writes the content of the specified file directory to an HTTP response output stream as a file block
-            Response.WriteFile(filename);
-            //sends all currently buffered output to the client
-            Response.Flush();
-            //Clears all content output from Buffer Stream
-            Response.Clear();
-        }
+            GridViewRow row = (sender as Button).NamingContainer as GridViewRow;
 
+            lblId.Text = row.Cells[0].Text.Trim();
+            Name.Text = row.Cells[1].Text.Trim();
+            Email.Text = row.Cells[2].Text.Trim();
+            Address.Text = row.Cells[3].Text.Trim();
+
+            Number.Text = row.Cells[4].Text.Trim();
+            
+         
+
+        }
+        protected void btnGenerate_Click(object sender, EventArgs e)
+        {
+            string code = txtCode.Text;
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(code, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            System.Web.UI.WebControls.Image imgBarCode = new System.Web.UI.WebControls.Image();
+            imgBarCode.Height = 150;
+            imgBarCode.Width = 150;
+            using (Bitmap bitMap = qrCode.GetGraphic(20))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    bitMap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    byte[] byteImage = ms.ToArray();
+                    imgBarCode.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(byteImage);
+                    SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString);
+                    SqlCommand cmd = new SqlCommand("UPDATE QRCODE SET qrcode = @qrcode WHERE qrid = 1", con);
+
+                    cmd.Parameters.AddWithValue("@qrcode", byteImage);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+
+                    txtCode.Text = string.Empty;
+
+
+                    cmd = new SqlCommand("SELECT qrcode FROM QRCODE", con);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    gvQRCode.DataSource = dt;
+                    gvQRCode.DataBind();
+                }
+            }
+        }
+        protected void btnselect_Click(object sender, EventArgs e)
+        {
+
+            ReportDocument reportdocument = new ReportDocument();
+            reportdocument.Load(Server.MapPath("CrystalReport5.rpt"));
+            reportdocument.SetDatabaseLogon("", "", "DESKTOP-TIH3JDS", "login");
+            reportdocument.SetParameterValue("Email", Email.Text);
+
+            CrystalReportViewer1.ReportSource = reportdocument;
+            BindGridView();
+        }
+        protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DataRowView dr = (DataRowView)e.Row.DataItem;
+                string imageUrl = "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr["qrcode"]);
+                (e.Row.FindControl("Image1") as System.Web.UI.WebControls.Image).ImageUrl = imageUrl;
+            }
+        }
+        protected void Delete(object sender, EventArgs e)
+        {
+            GridViewRow row = (sender as Button).NamingContainer as GridViewRow;
+            string ID = row.Cells[0].Text.Trim();
+            string constr = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("Delete From Blotter WHERE FID = @FID", con))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@FID", ID);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+
+            BindGridView();
+        }
+        private void BindGridView()
+        {
+            string constr = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT FID,FullName,Email,Number,Address,PlaceIncident,Incident,Narative,Purok,Witness1,Witness2,Witness3,Date FROM Blotter", con))
+                {
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        DataTable dt = new DataTable();
+                        sda.Fill(dt);
+                        gvCustomers.DataSource = dt;
+                        gvCustomers.DataBind();
+                    }
+                }
+            }
+        }
     }
 }
     

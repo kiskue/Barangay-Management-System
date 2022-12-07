@@ -7,12 +7,15 @@ namespace BMS.Models
 {
     public class UserRigestration
     {
-        [Required(AllowEmptyStrings = false, ErrorMessage = "First Name is requierd")]
-        public string FirstName { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Last Name is requierd")]
-        public string LastName { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Full Name is requierd")]
+        public string FullName { get; set; }
+      
         [Required(AllowEmptyStrings = false, ErrorMessage = "Email ID is requierd")]
         public string Email { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Number is requierd")]
+        public int Number { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Address is requierd")]
+        public string Address { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Password is requierd")]
         [DataType(DataType.Password)]
         [MinLength(8, ErrorMessage = "Need min 8 character")]

@@ -5,30 +5,40 @@
 
 <!DOCTYPE html>
 
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Dashboard</title>
+
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-          rel="stylesheet">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet"/>
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width" />
-    <title>Location</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuVyZWwqTq86AJctzNQmhb2hmUt5M7tQE&libraries=places&v=weekly"></script>
-    <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <script src="scripts/jquery-3.6.0.min.js"></script>
-    <script src="scripts/bootstrap.min.js"></script>
-    <script src="scripts/jquery.validate.min.js"></script>
-    <script src="vendor/jquery/jquery.min.js"></script>
+    <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
+     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script> 
+     <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -42,10 +52,28 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link href="bootstrap.min.css" rel="stylesheet" />
-<style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css" />
+
+<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("[id*=gvCustomers]").prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
+            "paging": false,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true
+        });
+    })
+</script>
+   <style>
 body {
 width: 100%;
 margin: 5px;
@@ -69,10 +97,9 @@ tr:nth-child(odd) {
 background: #fff;
 }
 </style>
-
 </head>
-<body id="page-top">
-       <form id="form1" runat="server">
+<body id="page-top" >
+    <form id="form1" runat="server">
         <div id="wrapper">
 
             <!-- Sidebar -->
@@ -80,8 +107,8 @@ background: #fff;
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.aspx">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-bg-logo"></i>
+                    <div class="sidebar-brand-icon ">
+                       <img src="hagonoy.jpg"  width="40"  height="40" />
                     </div>
                     <div class="sidebar-brand-text mx-3">Barangay Hagonoy<sup></sup></div>
                 </a>
@@ -91,9 +118,9 @@ background: #fff;
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="/Home/Dashboard">
+                    <a class="nav-link" href="dashboard.aspx">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Home</span>
+                        <span>Dashboard</span>
                     </a>
                 </li>
 
@@ -102,21 +129,21 @@ background: #fff;
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Request
+                    Interface
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
+                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Permits</span>
+                        <i class="fas fa-fw fa-address-book"></i>
+                        <span>Residents</span>
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Resident of Barangay:</h6>
-                            <a class="collapse-item" href="/Home/Location">Add Residents</a>
-                            <a class="collapse-item" href="cards.html">Resident list</a>
+                            <a class="collapse-item" href="/Home/Location">Residents</a>
+                     
                         </div>
                     </div>
                 </li>
@@ -125,48 +152,78 @@ background: #fff;
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-wrench"></i>
+                        <i class="fas fa-fw fa-file"></i>
                         <span>Certificates</span>
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Certificates:</h6>
-                            <a class="collapse-item" href="/UserDash/Certificate">Barangay Clearance</a>
-                            <a class="collapse-item" href="utilities-border.html">Barangay Indigency</a>
+                            <a class="collapse-item" href="barangaycertificates.aspx">Barangay Clearance</a>
+                            <a class="collapse-item" href="BarangayIndigency.aspx">Barangay Indigency</a>
                             <a class="collapse-item" href="utilities-animation.html">CEDULA</a>
                         </div>
                     </div>
+                   
+                    
                 </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                       aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Pages</span>
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitie"
+                       aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-file"></i>
+                        <span>Permits</span>
                     </a>
-                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div id="collapseUtilitie" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Login Screens:</h6>
-                            <a class="collapse-item" href="login.html">Login</a>
-                            <a class="collapse-item" href="register.html">Register</a>
-                            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Other Pages:</h6>
-                            <a class="collapse-item" href="404.html">404 Page</a>
-                            <a class="collapse-item" href="blank.html">Blank Page</a>
+                            <h6 class="collapse-header">Permits:</h6>
+                            <a class="collapse-item" href="BusinessPermit.aspx">Business Permits</a>
+                            <a class="collapse-item" href="BuildingPermit.aspx">Building permits</a>
+                           
                         </div>
                     </div>
+                   
+                    
                 </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+                 <li class="nav-item">
+                    <a class="nav-link" href="ManageRoles.aspx">
+                        <i class="fas fa-fw fa-address-book"></i>
+                        <span>Manage Roles</span>
+                    </a>
+                </li>
+                   <li class="nav-item">
+                    <a class="nav-link" href="BarangayOfficials.aspx">
+                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
+                        <span>Sanguniang Barangay</span>
+                    </a>
+                </li>
+
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="Hotspot.aspx">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Hotspot Area</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="blotter.aspx">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Blotter</span>
+                    </a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="blotter.aspx">
+                        <i class="fas fa-fw fa-calendar"></i>
+                        <span>Calendar</span>
+                    </a>
+                </li>
+              
+                
+
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
@@ -179,7 +236,6 @@ background: #fff;
 
 
             </ul>
-
             <!-- End of Sidebar -->
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -200,200 +256,148 @@ background: #fff;
                         <ul class="navbar-nav ml-auto">
 
                             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                            <!-- Nav Item - Alerts -->
-                            <!-- Nav Item - User Information -->
-                    
 
-                        </ul>
 
+                      <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     <img class="img-profile rounded-circle"
+                                         src="img/undraw_profile.svg" style="padding-right:5px;">
+                                     <asp:Label ID="lb1" runat="server" Text="Label"></asp:Label>  
+                                   
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Settings
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Activity Log
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
+                          
                     </nav>
+                    </div>
                     <!-- End of Topbar -->
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                    </div>
-                    <!-- End of Content Wrapper -->
 
-                    <div class="col-ml-2 col-md-15 col-xs-20">
-                     
-                            <div class="container py-4">
-                                <h5 class="text-center">Report Incident</h5>
+                                <div class="container py-4">
+                              
                                 <div class="card">
                                     <div class="card-header bg-danger">
-                                        <h6 class="card-title text-uppercase text-white">BARANGAY HAGONOY</h6>
+                                        <h6 class="card-title text-uppercase text-white">BARANGAY CERTIFICATES</h6>
                                     </div>
 
                                     <div class="form-row justify-content-center" style="padding:15px 15px 15px 15px;">
-                                      <div class="col-lg-4 col-lg-offset-4">
-                                            <div class="form-group">
-                                                <label>Name:</label>
-                                                 <asp:Textbox runat="server" type="text" class="form-control" placeholder="Name"  id="Name" />
+                                  
 
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-xs-12">
-                                            <div class="form-group">
-                                                <label>Email:</label>
-                                                 <asp:Textbox runat="server" type="text" class="form-control" placeholder="Email"  id="Email" />
-                                                 
-                                            </div>
-                                        </div>
-                                        <asp:Button Text="Select" ID="Button1" CssClass="btn btn-primary btn-user btn-block" style="width:70px; height:35px; margin-top:33px;" runat="server" Onclick="btnselect_Click"  />
-                                        <div class="col-sm-4 col-md-3 col-xs-12">
-                                            <div class="form-group">
-                                                <label>Contact Number:</label>
-                                                 <asp:Textbox runat="server" type="text" class="form-control" placeholder="Contact Number"  id="Number" />
-                                            </div>
-                                        </div>
-                                      <div class="col-lg-4 col-lg-offset-4">
-                                            <div class="form-group">
-                                                <label>House No. / Street:</label>
-                                                 <asp:Textbox runat="server" type="text" class="form-control" placeholder="House No. and Street"  id="StreetNum" />
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-xs-12">
-                                            <div class="form-group">
-                                                <label>Purok:</label>
-                                              <asp:Textbox runat="server" type="text" class="form-control" placeholder="Purok"  id="Purok" />
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-xs-12">
-                                            <div class="form-group">
-                                                <label>Purpose:</label>
-                                                <asp:Textbox runat="server" type="text" class="form-control" placeholder="Purpose" id="Purpose" />
-                                            </div>
-                                        </div>
-                                      <div class="col-sm-4 col-md-3 col-xs-12">
-                                            <div class="form-group">
-                                                <label>Year:</label>
-                                                <asp:Textbox runat="server" type="month" id="Year"  />
-                                            </div>
-                                        </div>
-                                            
-                                        <div class="col-sm-4 col-md-3 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="place">Choose a Day:</label>
-                                                <select runat="server" id="Day" required="Please fill up">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
-                                                    <option value="13">13</option>
-                                                    <option value="14">14</option>
-                                                    <option value="15">15</option>
-                                                    <option value="16">16</option>
-                                                    <option value="17">17</option>
-                                                    <option value="18">18</option>
-                                                    <option value="19">19</option>
-                                                    <option value="20">20</option>
-                                                    <option value="21">21</option>
-                                                    <option value="22">22</option>
-                                                    <option value="23">23</option>
-                                                    <option value="24">24</option>
-                                                    <option value="25">25</option>
-                                                    <option value="26">26</option>
-                                                    <option value="27">27</option>
-                                                    <option value="28">28</option>
-                                                    <option value="29">29</option>
-                                                    <option value="30">30</option>
-                                                    <option value="31">31</option>
-                                                </select>
-                                           </div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="place">Choose a Month:</label>
-                                                <select runat="server" id="Month" required="Please fill up">
-                                                    <option value="January">January</option>
-                                                    <option value="Febraury">February</option>
-                                                    <option value="March">March</option>
-                                                    <option value="April">April</option>
-                                                    <option value="May">May</option>
-                                                    <option value="June">June</option>
-                                                    <option value="July">July</option>
-                                                    <option value="August">August</option>
-                                                    <option value="September">September</option>
-                                                    <option value="October">October</option>
-                                                    <option value="November">November</option>
-                                                    <option value="December">December</option>
-
-                                                </select>
-                                         </div>
-                                        </div>
-                                     
-                                    </div>
-                                </div>
-                                                                     <div class="card-body">  
-                    <asp:Button Text="submit" ID="Button2" CssClass="btn btn-primary btn-user btn-block" style="width:100px; float:right;" runat="server" Onclick="btnSave_Click"  />
-                    <button style="margin-bottom:10px;" type="button" data-target="#myMap" data-toggle="modal" class="btn btn-danger btn-sm rounded-0"><i class="fa fa-plus-circle"></i> Send SMS Message</button>  
-  
-                    <div class="modal fade" id="myMap" style="width:500px; align-content:center;">  
-                        <div class="modal-dialog modal-lg">  
-                            <div class="modal-content form-row justify-content-center ">  
-                                <div class="modal-header">  
-                                    <h4 class="modal-title">Send SMS Message</h4>  
-                                    <button type="button" class="close" data-dismiss="modal">×</button>  
-                                </div>  
-                                <div class="modal-body ">  
-                                       <div class="col-sm-4 col-md-4 col-xs-12">  
-                                            <div class="form-group">
-                                                <label>Number:</label>
-                                              <asp:Textbox runat="server" type="text" class="form-control" placeholder="Purok"  id="Textbox1" />
-                                            </div>
-                                        </div>
-                                    
-                                         <div class="col-sm-12 col-md-12 col-xs-12">
-                                            <div class="form-group "rows="5" >
-                                                <label>Message:</label>
-                                                <asp:Textbox runat="server" type="text" class="form-control" placeholder="Purpose" id="Textbox2" />
-                                            </div>
-                                        </div>                            
-                                </div>  
-                                <div class="modal-footer">  
-                                    
-                                    <button ID="Button3" class="btn btn-primary rounded-0" runat="server" Onclick="btnsend_Click">Submit</button>  
-                                </div>  
-                            </div>  
-                        </div>  
-                    </div>  
-                  
-                </div>  
-            </div>  
-                        
+                   
                       
-                            
+                <asp:ScriptManager runat="server" />
 
-                                </div>
+    <ContentTemplate >
+        <asp:GridView ID="gvCustomers" runat="server" AutoGenerateColumns="false" class="table table-condensed " 
+            ClientIDMode="Static">
+            <Columns >
+                <asp:BoundField DataField="ID" HeaderText="ID" />
+                <asp:BoundField DataField="FullName" HeaderText="Name" />
+                  <asp:BoundField DataField="Email" HeaderText="Email" />
+                <asp:BoundField DataField="Number" HeaderText="Number" />
+                <asp:BoundField DataField="Purpose" HeaderText="Purpose" />
+                <asp:BoundField DataField="Date" HeaderText="Year" />
+                <asp:TemplateField HeaderText="Action">
+                    <ItemTemplate >
+                        <asp:Button ID="btnEdit" Text="Select" runat="server" OnClick="Edit" CssClass="btn btn-primary justify-content-around"/>
+                        <asp:Button ID="btnDelete" Text="Delete" runat="server" CssClass="btn btn-danger justify-content-around" 
+                            OnClick="Delete" OnClientClick="return confirm('Are you sure you want to delete?')" />
+               
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+         <hr />
+        <table align="center">
+            <tr>
+                <td>ID</td>
+                <td><asp:Label ID="lblId" runat="server" CssClass="form-control" /></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td> <asp:Textbox runat="server" type="text" class="form-control" placeholder="Name"  id="Name" /></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td> 
+                                                
+                                                 <asp:Textbox runat="server" type="text" class="form-control" placeholder="Name"  id="Email" />
 
-
-
-
-                            </div>
+                                           </td>
+            </tr>
+              <tr>
+                <td>Number</td>
+                <td> <asp:Textbox runat="server" type="text" class="form-control" placeholder="Contact Number"  id="Number" /></td>
+            </tr>
+             
+              <tr>
+                <td>Purpose</td>
+                <td><asp:Textbox runat="server" type="text" class="form-control" placeholder="Purpose" id="Purpose" /></td>
+            </tr>
+              <tr>
+                <td>Year</td>
+                <td><asp:Textbox runat="server" class="form-control" type="text" id="Year"   /></td>
+            </tr>
+            <tr>
                 
-                             <div class="col-ml-2 col-md-15 col-xs-20">
-                     
-                            <div class="container py-4">
-                    <div class="card">
-                           
-                        <div class="form-row justify-content-center" style="padding:15px 15px 15px 15px; margin-top:20px">
-                         <asp:GridView ID="GridView1" runat="server"  UseAccessibleHeader="true" CssClass="table table-condensed table-hover " Width="1200px"  >
+                <td> <asp:Textbox runat="server" class="form-control" type="text" value="Barangay Clearance" id="indigency" hidden="true"  /></td>
+            </tr>
+            <tr>
+                
+                <td> <asp:Textbox runat="server" class="form-control" type="text" value="Claimed" id="claimed" hidden="true"  /></td>
+            </tr>
+            <tr>
+                <td style="margin-right:15px;"></td>
+                <td>
+                   <asp:TextBox ID="txtCode" runat="server"></asp:TextBox>
+<asp:Button ID="btnGenerate" runat="server" Text="Generate" OnClick="btnGenerate_Click" />
 
+<br />
+<asp:GridView runat="server" ID="gvQRCode" AutoGenerateColumns="false" OnRowDataBound="OnRowDataBound">
+    <Columns>
+        <asp:TemplateField HeaderText="QRCODE">
+            <ItemTemplate>
+                <asp:Image ID="Image1" runat="server" Height="200px" Width="200px" />
+            </ItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                          <asp:Button Text="Print" ID="Button3" CssClass="btn btn-primary " runat="server" Onclick="btnselect_Click"  />
+                    <asp:Button ID="btnSave" Text="Update" runat="server" OnClick="Save" CssClass="btn btn-success" />
+                    <asp:Button Text="Done" ID="Button1" CssClass="btn btn-primary " runat="server"  onclick="btndone" OnClientClick="return confirm('Are you sure you want to Mark Claimed this request?')"/>
+                </td>
+            </tr>
+        </table>
 
+    </ContentTemplate>
+         
 
-                         </asp:GridView>
-
-                        </div>
-                         </div>
-                        
-                    </div>
-                </div>
                         <div class="form-row justify-content-center" style="padding:15px 15px 15px 15px; margin-top:20px">
                          <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="True" GroupTreeImagesFolderUrl="" Height="600px" ReportSourceID="CrystalReportSource1" ToolbarImagesFolderUrl="" ToolPanelWidth="200px" Width="800px" EnableDatabaseLogonPrompt="False" EnableParameterPrompt="False" />
                            
@@ -408,14 +412,9 @@ background: #fff;
         </div>
 
             
+    </div>
+                                </div>
      
-                     
-        <!-- End of Page Wrapper -->
-        <!-- Scroll to Top Button-->
-
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
 
         <!-- Logout Modal-->
         <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -431,16 +430,14 @@ background: #fff;
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
-
-
-
+                        <a class="btn btn-primary" href="index.aspx">Logout</a>
                     </div>
                 </div>
             </div>
         </div>
-        
-    </form>
+</form>
 </body>
 </html>
+
 
 

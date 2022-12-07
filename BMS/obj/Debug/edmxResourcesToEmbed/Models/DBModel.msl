@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="SQLDBModelStoreContainer" CdmEntityContainer="loginEntities">
+  <EntityContainerMapping StorageEntityContainer="loginModelStoreContainer" CdmEntityContainer="loginEntities1">
     <EntitySetMapping Name="UserMs">
-      <EntityTypeMapping TypeName="SQLDBModel.UserM">
+      <EntityTypeMapping TypeName="loginModel.UserM">
         <MappingFragment StoreEntitySet="UserM">
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="EmailVerification" ColumnName="EmailVerification" />
           <ScalarProperty Name="ActivetionCode" ColumnName="ActivetionCode" />

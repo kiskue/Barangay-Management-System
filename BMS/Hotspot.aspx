@@ -31,10 +31,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
+       <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
-
+         <script type="text/javascript" src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
@@ -56,6 +56,7 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
 
         };
+        var googleMarkers = [];
         var infoWindow = new google.maps.InfoWindow();
         var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
         for (i = 0; i < markers.length; i++) {
@@ -68,6 +69,8 @@
                 title: data.title
 
             });
+            googleMarkers.push(marker);
+
             (function (markers, data) {
                 google.maps.event.addListener(marker, "click", function (e) {
                     infoWindow.setContent(data.description);
@@ -80,9 +83,37 @@
             
             })(markers, data);
         }
+        var mcOptions = { gridSize: 50, maxZoom: 15 };
+        var markerCluster = new MarkerClusterer(map, googleMarkers, {
+            imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+        });
+
     }
 </script>
+     <style>
+body {
+width: 100%;
+margin: 5px;
+}
 
+.table-condensed tr th {
+border: 0px solid #6e7bd9;
+color: white;
+background-color: #6e7bd9;
+}
+
+.table-condensed, .table-condensed tr td {
+border: 0px solid #000;
+}
+
+tr:nth-child(even) {
+background: #f8f7ff
+}
+
+tr:nth-child(odd) {
+background: #fff;
+}
+</style>
 </head>
 <body id="page-top" >
     <form id="form1" runat="server">
@@ -119,7 +150,7 @@
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
+                      <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                        aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-address-book"></i>
@@ -129,7 +160,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Resident of Barangay:</h6>
                             <a class="collapse-item" href="/Home/Location">Residents</a>
-                            <a class="collapse-item" href="cards.html">Resident list</a>
+                     
                         </div>
                     </div>
                 </li>
@@ -146,36 +177,48 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Certificates:</h6>
                             <a class="collapse-item" href="barangaycertificates.aspx">Barangay Clearance</a>
-                            <a class="collapse-item" href="barangaycertificates.aspx">Barangay Indigency</a>
+                            <a class="collapse-item" href="BarangayIndigency.aspx">Barangay Indigency</a>
                             <a class="collapse-item" href="utilities-animation.html">CEDULA</a>
                         </div>
                     </div>
-                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse"
+                   
+                    
+                </li>
+             
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitie"
                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-male"></i>
-                        <span>Manage Roles</span>
+                        <i class="fas fa-fw fa-file"></i>
+                        <span>Permits</span>
                     </a>
-                    <div id="collapse" class="collapse" aria-labelledby="headingUtilities"
+                    <div id="collapseUtilitie" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Roles:</h6>
-                            <a class="collapse-item" href="ManageRoles.aspx">Super Admin</a>
-                            <a class="collapse-item" href="barangaycertificates.aspx">Admin 1</a>
-                            <a class="collapse-item" href="utilities-animation.html">Admin 2</a>
+                            <h6 class="collapse-header">Permits:</h6>
+                            <a class="collapse-item" href="BusinessPermit.aspx">Business Permits</a>
+                            <a class="collapse-item" href="BuildingPermit.aspx">Building permits</a>
+                           
                         </div>
                     </div>
+                   
+                    
                 </li>
-
                 <!-- Divider -->
                 <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
+                 <li class="nav-item">
+                    <a class="nav-link" href="ManageRoles.aspx">
+                        <i class="fas fa-fw fa-address-book"></i>
+                        <span>Manage Roles</span>
+                    </a>
                 </li>
+                   <li class="nav-item">
+                    <a class="nav-link" href="BarangayOfficials.aspx">
+                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
+                        <span>Sanguniang Barangay</span>
+                    </a>
+                </li>
+
+                
                 <li class="nav-item">
                     <a class="nav-link" href="Hotspot.aspx">
                         <i class="fas fa-fw fa-chart-area"></i>
@@ -196,18 +239,7 @@
                         <span>Calendar</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="blotter.aspx">
-                        <i class="fas fa-fw fa-clipboard-list"></i>
-                        <span>Surveys</span>
-                    </a>
-                </li>
-                 <li class="nav-item">
-                    <a class="nav-link" href="blotter.aspx">
-                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
-                        <span>Revenue</span>
-                    </a>
-                </li>
+              
 
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
@@ -304,33 +336,30 @@
                         <!-- Content Row -->
                       <div class="row">
 
-                           <div class="col-xl-7 col-md-8 mb-10" style=" height:130px; ">
-                                <div class="card border-left-success shadow h-100 py-2">
+                           <div class="col-xl-7 col-md-8 mb-10" style=" height:130px; margin-left:15px;">
+                                <div class="card border-left-success shadow h-180 py-2">
                                     <div class="card-body" style="justify-content:center;">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <h4 class="text-uppercase text-center">Chart Report</h4>  
-            <div class="form-group " " >  
-                <label>Select Chart:</label>  
-                <asp:DropDownList ID="ddlChart" AutoPostBack="true" runat="server" CssClass="custom-select col-md-4" OnSelectedIndexChanged="ddlChart_SelectedIndexChanged"></asp:DropDownList>  
-            </div>  
-            <asp:Chart ID="Chart1" runat="server" Width="675">  
-                <Titles>  
-                    <asp:Title Text="Total Incident and Violence Report"></asp:Title>  
-                </Titles>  
-                <Series>  
-                    <asp:Series Name="Series1" ChartArea="ChartArea1"></asp:Series>  
-                </Series>  
-                <ChartAreas>  
-                    <asp:ChartArea Name="ChartArea1">  
-                        <AxisX Title="Name of Plce"></AxisX>  
-                        <AxisY Title="Total Report"></AxisY>  
-                    </asp:ChartArea>  
-                </ChartAreas>  
-            </asp:Chart>  
-        </div>  
-
-                                        </div>
+                                        <asp:Chart ID="PieChartMonthToDate" BorderlineDashStyle="Solid"
+    Visible="true" ImageType="Png" runat="server" Height="350px" Width="600px" PaletteCustomColors="128, 255, 128; 255, 128, 0">
+    <Titles>
+        <asp:Title TextStyle="Frame">
+        </asp:Title>
+    </Titles>
+    <Legends>
+        <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default"
+            LegendStyle="Column">
+        </asp:Legend>
+    </Legends>
+    <Series>
+        <asp:Series Name="Series1" ChartType="Pie" YValuesPerPoint="2">
+        </asp:Series>
+    </Series>
+    <ChartAreas>
+        <asp:ChartArea IsSameFontSizeForAllAxes="true" BorderWidth="0" Name="ChartArea1">
+            <Area3DStyle Enable3D="true" />
+        </asp:ChartArea>
+    </ChartAreas>
+</asp:Chart>
 
                                     </div>
                                 </div>
@@ -372,7 +401,7 @@
                                     </div>
                                 </div>
                             </div>
-                             <div class="col-xl-2 col-md-6 mb-12" style="margin-right:20px;height:100px;margin-left:790px;">
+                             <div class="col-xl-2 col-md-6 mb-12" style="margin-right:20px;height:100px;margin-left:810px;">
                               <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -419,7 +448,23 @@
 
 <br class="col-xl-3 col-md-6 mb-4"/>
 Search :
-<asp:Textbox runat="server" type="date" id="date" ></asp:TextBox>
+ <select runat="server" id="report" name="Place" required="Please fill up"  style="height:33px;">
+                                        <option value="Motorcycle Incident">Motorcycle Incident</option>
+                                        <option value="Vehicle Incident">Vehicle Incident</option>
+                                        <option value="Fire">Fire</option>
+                                        <option value="Shooting Incident">Shooting Incident</option>
+                                       <option value="Ramble">Ramble</option>
+                                       <option value="Stabbed by a knife">Stabbed by a knife</option>
+                                       <option value="Robbery">Robbery</option>
+                                       <option value="Hold Up">Hold Up</option>
+                                       <option value="Murder">Murder</option>
+                                     <option value="Fighting">Fighting</option>
+                                     <option value="Rape">Rape</option>
+                                     <option value="Suicide">Suicide</option>
+                                    <option value="Flooding">Flooding</option>
+                                    <option value="Late Night Vedioke">Late Night Vedioke</option>
+                                    <option value="Missing Person">Missing Person</option>
+                                    </select>
 <asp:Button ID="btnSearch" runat="server" text="Search" OnClick="btnSearch_Click" CssClass="btn btn-info p-1 "/>
  <br /> 
 <br />
@@ -430,11 +475,10 @@ Search :
          <asp:Repeater ID="rptMarkers" runat="server">
      <ItemTemplate>
     {
-        
-        "title": '<%# Eval("Place") %>',
+         "title": '<%# Eval("Date") %>',
         "lat": '<%# Eval("Latitude") %>',
         "lng": '<%# Eval("Longitude") %>',
-        "description": '<%# Eval("Date") %>'
+         "description": '<%# Eval("IncidentReport") %>'
     }
     </ItemTemplate>
 <SeparatorTemplate>
@@ -448,17 +492,7 @@ Search :
                     <!-- /.container-fluid -->
 
                 </div>
-   <div class="container py-4">
-                  
-                    <div class="card">
-                           
-                        <div class="form-row justify-content-center" style="padding:15px 15px 15px 15px;">
-                         <asp:GridView ID="GridView1" runat="server" Width="1048px">
-                         </asp:GridView>
-
-                        </div>
-                         </div>
-                     </div>a
+  
                 <!-- End of Main Content -->
                 <!-- Footer -->
                 <footer class="sticky-footer bg-white">

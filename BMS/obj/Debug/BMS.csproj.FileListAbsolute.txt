@@ -76,11 +76,13 @@ D:\Barangay Management System\Barangay-Management-System\Barangay-Management-Sys
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\Dapper.dll
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\EntityFramework.dll
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\EntityFramework.SqlServer.dll
+D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\log4net.dll
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\Microsoft.IdentityModel.Logging.dll
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\Microsoft.IdentityModel.Tokens.dll
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\Microsoft.Web.Infrastructure.dll
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\Newtonsoft.Json.dll
+D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\QRCoder.dll
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\System.IdentityModel.Tokens.Jwt.dll
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\System.Web.Helpers.dll
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\System.Web.Mvc.dll
@@ -110,6 +112,7 @@ D:\Barangay Management System\Barangay-Management-System\Barangay-Management-Sys
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\Dapper.xml
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\EntityFramework.xml
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\EntityFramework.SqlServer.xml
+D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\log4net.xml
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\Microsoft.IdentityModel.Tokens.xml
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\Newtonsoft.Json.xml
@@ -122,8 +125,8 @@ D:\Barangay Management System\Barangay-Management-System\Barangay-Management-Sys
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\System.Web.WebPages.Deployment.xml
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\System.Web.WebPages.Razor.xml
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\bin\Twilio.xml
+D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\obj\Debug\BMS.csproj.AssemblyReference.cache
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\obj\Debug\BMS.csproj.CoreCompileInputs.cache
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\obj\Debug\BMS.csproj.CopyComplete
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\obj\Debug\BMS.dll
 D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\obj\Debug\BMS.pdb
-D:\Barangay Management System\Barangay-Management-System\Barangay-Management-System\Barangay-Management-System\BMS\obj\Debug\BMS.csproj.AssemblyReference.cache

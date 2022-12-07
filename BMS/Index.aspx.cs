@@ -11,87 +11,48 @@ namespace BMS
 {
     public partial class Index : System.Web.UI.Page
     {
+        string strConnString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+        string str, UserName, Password;
+        SqlCommand com;
+        SqlDataAdapter sqlda;
+        DataTable dt;
+        int RowCount;
         protected void Page_Load(object sender, EventArgs e)
         {
            
         }
-       
-        protected void btnlogin_Click(object sender, EventArgs e)
+
+        protected void btn_login_Click(object sender, EventArgs e)
         {
-            string constring = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constring))
+            SqlConnection con = new SqlConnection(strConnString);
+            con.Open();
+            str = "Select * from Role";
+            com = new SqlCommand(str);
+            sqlda = new SqlDataAdapter(com.CommandText, con);
+            dt = new DataTable();
+            sqlda.Fill(dt);
+            RowCount = dt.Rows.Count;
+            for (int i = 0; i < RowCount; i++)
             {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT COUNT(1) FROM Users WHERE Username=@Username AND Password=@Password", con);
-                cmd.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
-                cmd.Parameters.AddWithValue("@Password", txtpassword.Text.Trim());
-                int count = Convert.ToInt32(cmd.ExecuteScalar());
-                if (count == 1)
+                UserName = dt.Rows[i]["UserName"].ToString();
+                Password = dt.Rows[i]["Password"].ToString();
+                if (UserName == txtUsername.Text && Password == txtPassword.Text)
                 {
-                    Session["Username"] = txtUsername.Text.Trim();
-                    Response.Redirect("dashboard.aspx");
+                    Session["UserName"] = UserName;
+                    if (dt.Rows[i]["Role"].ToString() == "SuperAdmin")
+                        Response.Redirect("dashboard.aspx");
+                    else if (dt.Rows[i]["Role"].ToString() == "Admin1")
+                        Response.Redirect("Admin1.aspx");
+                    else if (dt.Rows[i]["Role"].ToString() == "Admin2")
+                        Response.Redirect("Admin2.aspx");
                 }
                 else
                 {
-                    lblError.Text = "Invalid Username or Password";
+                    lblError.Text = "Invalid User Name or Password! Please try again!";
                 }
-                if (txtUsername.Text.Trim() == "" || txtpassword.Text.Trim() == "")
-                {
-                    this.lblError.Text = "Please Enter Username and Password";
-                }
-                else
-                {
-                    this.lblError.Text = "Invalid Username or Password";
-
-                    var username = txtUsername.Text.Trim();
-                    var password = txtpassword.Text.Trim();
-
-
-                }
-
             }
         }
-        protected void btnSave_Click(object sender, EventArgs e)
-        {
 
-            string constring = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constring))
-            {
-             
-                SqlCommand cmd = new SqlCommand("AddNewReport", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("Name", name.Text);
-                cmd.Parameters.AddWithValue("Latitude", lat.Text);
-                cmd.Parameters.AddWithValue("Longitude", lng.Text);
-                cmd.Parameters.AddWithValue("Landmark", landmark.Text);
-                cmd.Parameters.AddWithValue("IncidentReport", report.Text);
-                cmd.Parameters.AddWithValue("Contact", contact.Text);
-                cmd.Parameters.AddWithValue("Place", place.Value);
-                cmd.Parameters.AddWithValue("Time", time.Text);
-                cmd.Parameters.AddWithValue("Date", date.Text);
-                con.Open();
-                int k = cmd.ExecuteNonQuery();
-                if (k != 0)
-                {
 
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                "swal('Thank You!', 'Your Report sent Successfully!', 'success')",true);
-
-                    name.Text = "";
-                    lat.Text = "";
-                    lng.Text = "";
-                    landmark.Text = "";
-                    report.Text = "";
-                    contact.Text = "";
-                    place.Value = "";
-                    time.Text = "";
-                    date.Text = "";
-                }
-                con.Close();
-               
-            }
-            
-        }
-       
     }
 }

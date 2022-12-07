@@ -15,8 +15,29 @@ namespace BMS
         {
             if (!IsPostBack)
             {
-                LoadRecord();
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("select IncidentReport, count(ID) Total from Report where  Barangay = 'Hagonoy' group by IncidentReport", conn))
+                    {
+                        Series series = PieChartMonthToDate.Series["Series1"];
+                        conn.Open();
+                        SqlDataReader rdr = cmd.ExecuteReader();
+                        while (rdr.Read())
+                        {
+                            series.Points.AddXY(rdr["IncidentReport"].ToString(), rdr["Total".ToString()]);
+                            PieChartMonthToDate.Series["Series1"].Label = "#PERCENT{P2}";
+                            PieChartMonthToDate.Series["Series1"].LegendText = "#VALX";
+                            PieChartMonthToDate.Legends[0].LegendStyle = LegendStyle.Column;
+                            PieChartMonthToDate.Legends[0].Docking = Docking.Right;
+                            PieChartMonthToDate.Legends[0].Alignment = System.Drawing.StringAlignment.Center;
+                        }
+                        rdr.Close();
+                    }
+                }
             }
+
+            lb1.Text = "<b><font color=black>" + "Welcome : " + "</font>" + "<b><font color=blue>" + Session["Username"] + "</font>";
+        
             string constring = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constring))
             {
@@ -66,11 +87,7 @@ namespace BMS
                     con.Close();
                 }
             }
-                if (!IsPostBack)
-            {
-                GetChartData();
-                GetChartTypes();
-            }
+             
             if (!this.IsPostBack)
             {
                 DataTable dt = this.GetData("select * from Report");
@@ -102,9 +119,9 @@ namespace BMS
         }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(date.Text))
+            if (!string.IsNullOrEmpty(report.Value))
             {
-                DataTable dt = this.GetData("select * from Report where Date = '" + date.Text + "'");
+                DataTable dt = this.GetData("select * from Report where IncidentReport = '" + report.Value + "'");
                 if (dt.Rows.Count > 0)
                 {
                     rptMarkers.DataSource = dt;
@@ -118,54 +135,7 @@ namespace BMS
                 }
             }
         }
-        private void GetChartTypes()
-        {
-            foreach (int chartType in Enum.GetValues(typeof(SeriesChartType)))
-            {
-                ListItem li = new ListItem(Enum.GetName(typeof(SeriesChartType), chartType), chartType.ToString());
-                ddlChart.Items.Add(li);
-            }
-        }
-
-        private void GetChartData()
-        {
-            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(CS))
-            {
-                SqlCommand cmd = new SqlCommand("GetReport", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                con.Open();
-                SqlDataReader rdr = cmd.ExecuteReader();
-                // Retrieve the Series to which we want to add DataPoints  
-                Series series = Chart1.Series["Series1"];
-                // Loop thru each Student record  
-                while (rdr.Read())
-                {
-                    // Add X and Y values using AddXY() method  
-                    series.Points.AddXY(rdr["place"].ToString(),
-                    rdr["Date"]);
-                }
-            }
-        }
-
-        protected void ddlChart_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Call Get ChartData() method when the user select a different chart type  
-            GetChartData();
-            this.Chart1.Series["Series1"].ChartType = (SeriesChartType)Enum.Parse(typeof(SeriesChartType), ddlChart.SelectedValue);
-        }
-        void LoadRecord()
-        {
-            string constring = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constring))
-            {
-                SqlCommand comm = new SqlCommand("select * from Report", con);
-                SqlDataAdapter d = new SqlDataAdapter(comm);
-                DataTable dt = new DataTable();
-                d.Fill(dt);
-                GridView1.DataSource = dt;
-                GridView1.DataBind();
-            }
-        }
+      
+      
     }
 }

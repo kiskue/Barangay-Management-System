@@ -60,22 +60,13 @@ namespace BMS
         protected global::System.Web.UI.WebControls.TextBox Number;
 
         /// <summary>
-        /// StreetNum control.
+        /// Address control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox StreetNum;
-
-        /// <summary>
-        /// Purok control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Purok;
+        protected global::System.Web.UI.WebControls.TextBox Address;
 
         /// <summary>
         /// Purpose control.
@@ -96,22 +87,22 @@ namespace BMS
         protected global::System.Web.UI.WebControls.TextBox Year;
 
         /// <summary>
-        /// Day control.
+        /// indigency control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect Day;
+        protected global::System.Web.UI.WebControls.TextBox indigency;
 
         /// <summary>
-        /// Month control.
+        /// pending control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect Month;
+        protected global::System.Web.UI.WebControls.TextBox pending;
 
         /// <summary>
         /// Button2 control.

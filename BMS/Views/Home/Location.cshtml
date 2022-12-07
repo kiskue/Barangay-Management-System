@@ -50,70 +50,7 @@
     <script src="~/js/demo/chart-pie-demo.js"></script>
     <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
 
-        $('#demoGrid').dataTable({
-        });
-
-
-        "processing": true, // for show progress bar
-            "serverSide": true, // for process server side
-                "filter": true, // this is for disable filter (search box)
-                    "orderMulti": false, // for disable multiple column at once
-                        "pageLength": 5,
-
-                            "ajax": {
-            "url": "/Demo/LoadData",
-                "type": "POST",
-                    "datatype": "json"
-        },
-
-        "columnDefs":
-        [{
-            "targets": [0],
-            "visible": false,
-            "searchable": false
-        },
-        {
-            "targets": [7],
-            "searchable": false,
-            "orderable": false
-        },
-        {
-            "targets": [8],
-            "searchable": false,
-            "orderable": false
-        },
-        {
-            "targets": [9],
-            "searchable": false,
-            "orderable": false
-        }],
-
-            "columns": [
-                { "data": "CustomerID", "name": "CustomerID", "autoWidth": true },
-                { "data": "CompanyName", "name": "CompanyName", "autoWidth": true },
-                { "data": "ContactName", "title": "ContactName", "name": "ContactName", "autoWidth": true },
-                { "data": "ContactTitle", "name": "ContactTitle", "autoWidth": true },
-                { "data": "City", "name": "City", "autoWidth": true },
-                { "data": "PostalCode", "name": "PostalCode", "autoWidth": true },
-                { "data": "Country", "name": "Country", "autoWidth": true },
-                { "data": "Phone", "name": "Phone", "title": "Status", "autoWidth": true },
-                {
-                    "render": function (data, type, full, meta) { return '<a class="btn btn-info" href="/Demo/Edit/' + full.CustomerID + '">Edit</a>'; }
-                },
-                {
-                    data: null, render: function (data, type, row) {
-                        return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.CustomerID + "'); >Delete</a>";
-                    }
-                },
-
-            ]
-
-                });
-            });
-    </script>
-    </script>
     <script type="text/javascript">
 
         var markers = @Html.Raw(ViewBag.Markers);
@@ -190,6 +127,176 @@
                 // adds the marker on the map
                 marker.setMap(map);
             }
+
+            // An array with the coordinates of the boundaries of Bucaramanga, extracted manually from the GADM database
+            var outerCoords = [
+     
+               
+                { lat: 14.509781, lng: 121.085137 },
+                { lat: 14.515536, lng: 121.078571 },
+                { lat: 14.517260, lng: 121.075116 },
+                { lat: 14.517916, lng: 121.075462 },
+                { lat: 14.519324, lng: 121.075746 },
+                { lat: 14.520188, lng: 121.075870 },
+                { lat: 14.520629, lng: 121.075689 },
+                { lat: 14.520507, lng: 121.073692 },
+                { lat: 14.519885, lng: 121.073865 },
+                { lat: 14.518866, lng: 121.073649 },
+                { lat: 14.517906, lng: 121.073224 },
+                { lat: 14.516531, lng: 121.072413 },
+                { lat: 14.515321, lng: 121.071646 },
+                { lat: 14.515757, lng: 121.070890 },
+                { lat: 14.515480, lng: 121.070627 },
+                { lat: 14.513517, lng: 121.064944 },
+                { lat: 14.513689, lng: 121.064476 },
+                { lat: 14.513878, lng: 121.064027 },
+                { lat: 14.514004, lng: 121.063763 },
+                { lat: 14.514121, lng: 121.063565 },
+                { lat: 14.514342, lng: 121.063339 },
+                { lat: 14.515050, lng: 121.062782 },
+                { lat: 14.515398, lng: 121.063201 },
+                { lat: 14.515773, lng: 121.063587 },
+                { lat: 14.516277, lng: 121.064585 },
+                { lat: 14.516469, lng: 121.064709 },
+                { lat: 14.516566, lng: 121.063517 },
+                { lat: 14.516841, lng: 121.063409 },
+                { lat: 14.517081, lng: 121.062623 },
+                { lat: 14.517482, lng: 121.062459 },
+                { lat: 14.517571, lng: 121.061704 },
+                { lat: 14.517608, lng: 121.061235 },
+                { lat: 14.517274, lng: 121.061192 },
+                { lat: 14.516948, lng: 121.061163 },
+                { lat: 14.516570, lng: 121.061127 },
+                { lat: 14.516361, lng: 121.061102 },
+                { lat: 14.515952, lng: 121.061026 },
+                { lat: 14.515352, lng: 121.060974 },
+                { lat: 14.515077, lng: 121.060964 },
+                { lat: 14.514322, lng: 121.060942 },
+                { lat: 14.513982, lng: 121.060897 },
+                { lat: 14.513432, lng: 121.060842 },
+                { lat: 14.512202, lng: 121.060687 },
+                { lat: 14.511783, lng: 121.061291 },
+                { lat: 14.511391, lng: 121.061598 },
+                { lat: 14.511009, lng: 121.062832 },
+                { lat: 14.510802, lng: 121.063277 },
+                { lat: 14.509317, lng: 121.064633 },
+                { lat: 14.508893, lng: 121.065169 },
+                { lat: 14.507693, lng: 121.067502 },
+                { lat: 14.507542, lng: 121.067698 },
+                { lat: 14.506934, lng: 121.068718 },
+                { lat: 14.506652, lng: 121.069343 },
+                { lat: 14.507233, lng: 121.069643 },
+                { lat: 14.507380, lng: 121.070029 },
+                { lat: 14.512264, lng: 121.073828 },
+                { lat: 14.512315, lng: 121.075814 },
+                { lat: 14.511867, lng: 121.076325 },
+                { lat: 14.511637, lng: 121.076467 },
+                { lat: 14.510517, lng: 121.076399 },
+                { lat: 14.509525, lng: 121.076565 },
+                { lat: 14.508634, lng: 121.077771 },
+                { lat: 14.508478, lng: 121.078243 },
+                { lat: 14.507731, lng: 121.080120 },
+                { lat: 14.507689, lng: 121.080882 },
+                { lat: 14.507066, lng: 121.081451 },
+                { lat: 14.507164, lng: 121.082512 },
+                { lat: 14.507767, lng: 121.082587 },
+                { lat: 14.508343, lng: 121.082299 },
+                { lat: 14.508878, lng: 121.083306 },
+                { lat: 14.509750, lng: 121.085087 },
+             
+            ];
+            var innerCoords = [
+
+
+                { lat: 14.509781, lng: 121.085137 },
+                { lat: 14.515536, lng: 121.078571 },
+                { lat: 14.517260, lng: 121.075116 },
+                { lat: 14.517916, lng: 121.075462 },
+                { lat: 14.519324, lng: 121.075746 },
+                { lat: 14.520188, lng: 121.075870 },
+                { lat: 14.520629, lng: 121.075689 },
+                { lat: 14.520507, lng: 121.073692 },
+                { lat: 14.519885, lng: 121.073865 },
+                { lat: 14.518866, lng: 121.073649 },
+                { lat: 14.517906, lng: 121.073224 },
+                { lat: 14.516531, lng: 121.072413 },
+                { lat: 14.515321, lng: 121.071646 },
+                { lat: 14.515757, lng: 121.070890 },
+                { lat: 14.515480, lng: 121.070627 },
+                { lat: 14.513517, lng: 121.064944 },
+                { lat: 14.513689, lng: 121.064476 },
+                { lat: 14.513878, lng: 121.064027 },
+                { lat: 14.514004, lng: 121.063763 },
+                { lat: 14.514121, lng: 121.063565 },
+                { lat: 14.514342, lng: 121.063339 },
+                { lat: 14.515050, lng: 121.062782 },
+                { lat: 14.515398, lng: 121.063201 },
+                { lat: 14.515773, lng: 121.063587 },
+                { lat: 14.516277, lng: 121.064585 },
+                { lat: 14.516469, lng: 121.064709 },
+                { lat: 14.516566, lng: 121.063517 },
+                { lat: 14.516841, lng: 121.063409 },
+                { lat: 14.517081, lng: 121.062623 },
+                { lat: 14.517482, lng: 121.062459 },
+                { lat: 14.517571, lng: 121.061704 },
+                { lat: 14.517608, lng: 121.061235 },
+                { lat: 14.517274, lng: 121.061192 },
+                { lat: 14.516948, lng: 121.061163 },
+                { lat: 14.516570, lng: 121.061127 },
+                { lat: 14.516361, lng: 121.061102 },
+                { lat: 14.515952, lng: 121.061026 },
+                { lat: 14.515352, lng: 121.060974 },
+                { lat: 14.515077, lng: 121.060964 },
+                { lat: 14.514322, lng: 121.060942 },
+                { lat: 14.513982, lng: 121.060897 },
+                { lat: 14.513432, lng: 121.060842 },
+                { lat: 14.512202, lng: 121.060687 },
+                { lat: 14.511783, lng: 121.061291 },
+                { lat: 14.511391, lng: 121.061598 },
+                { lat: 14.511009, lng: 121.062832 },
+                { lat: 14.510802, lng: 121.063277 },
+                { lat: 14.509317, lng: 121.064633 },
+                { lat: 14.508893, lng: 121.065169 },
+                { lat: 14.507693, lng: 121.067502 },
+                { lat: 14.507542, lng: 121.067698 },
+                { lat: 14.506934, lng: 121.068718 },
+                { lat: 14.506652, lng: 121.069343 },
+                { lat: 14.507233, lng: 121.069643 },
+                { lat: 14.507380, lng: 121.070029 },
+                { lat: 14.512264, lng: 121.073828 },
+                { lat: 14.512315, lng: 121.075814 },
+                { lat: 14.511867, lng: 121.076325 },
+                { lat: 14.511637, lng: 121.076467 },
+                { lat: 14.510517, lng: 121.076399 },
+                { lat: 14.509525, lng: 121.076565 },
+                { lat: 14.508634, lng: 121.077771 },
+                { lat: 14.508478, lng: 121.078243 },
+                { lat: 14.507731, lng: 121.080120 },
+                { lat: 14.507689, lng: 121.080882 },
+                { lat: 14.507066, lng: 121.081451 },
+                { lat: 14.507164, lng: 121.082512 },
+                { lat: 14.507767, lng: 121.082587 },
+                { lat: 14.508343, lng: 121.082299 },
+                { lat: 14.508878, lng: 121.083306 },
+                { lat: 14.509750, lng: 121.085087 },
+
+            ];
+            // Construct the polygon.
+            var BucaramangaPolygon = new google.maps.Polygon({
+                paths: [outerCoords, innerCoords],
+                strokeColor: '#21130d',
+                strokeOpacity: 0.8,
+                strokeWeight: 3,
+                fillColor: '#dddeda',
+                fillOpacity: 0.35,
+               
+             
+            });
+
+            // Draw the polygon on the desired map instance
+            BucaramangaPolygon.setMap(map);
+
+           
         }
     </script>
     <style>
@@ -245,7 +352,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Resident of Barangay:</h6>
                             <a class="collapse-item" href="/Home/Location">Residents</a>
-                            <a class="collapse-item" href="cards.html">Resident list</a>
+
                         </div>
                     </div>
                 </li>
@@ -262,31 +369,46 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Certificates:</h6>
                             <a class="collapse-item" href="~/barangaycertificates.aspx">Barangay Clearance</a>
-                            <a class="collapse-item" href="~/barangaycertificates.aspx">Barangay Indigency</a>
-                            <a class="collapse-item" href="utilities-animation.html">CEDULA</a>
+                            <a class="collapse-item" href="~/BarangayIndigency.aspx">Barangay Indigency</a>
+                            <a class="collapse-item" href="~/utilities-animation.html">CEDULA</a>
                         </div>
                     </div>
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse"
+
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitie"
                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-male"></i>
-                        <span>Manage Roles</span>
+                        <i class="fas fa-fw fa-file"></i>
+                        <span>Permits</span>
                     </a>
-                    <div id="collapse" class="collapse" aria-labelledby="headingUtilities"
+                    <div id="collapseUtilitie" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Roles:</h6>
-                            <a class="collapse-item" href="ManageRoles.aspx">Super Admin</a>
-                            <a class="collapse-item" href="barangaycertificates.aspx">Admin 1</a>
-                            <a class="collapse-item" href="utilities-animation.html">Admin 2</a>
+                            <h6 class="collapse-header">Permits:</h6>
+                            <a class="collapse-item" href="~/BusinessPermit.aspx">Business Permits</a>
+                            <a class="collapse-item" href="~/BuildingPermit.aspx">Building permits</a>
+
                         </div>
                     </div>
-                </li>
 
+
+                </li>
                 <!-- Divider -->
                 <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="~/ManageRoles.aspx">
+                        <i class="fas fa-fw fa-address-book"></i>
+                        <span>Manage Roles</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/BarangayOfficials.aspx">
+                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
+                        <span>Sanguniang Barangay</span>
+                    </a>
+                </li>
 
-                <!-- Heading -->
-                <!-- Nav Item - Pages Collapse Menu -->
 
                 <li class="nav-item">
                     <a class="nav-link" href="~/Hotspot.aspx">
@@ -306,18 +428,6 @@
                     <a class="nav-link" href="~/blotter.aspx">
                         <i class="fas fa-fw fa-calendar"></i>
                         <span>Calendar</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="~/blotter.aspx">
-                        <i class="fas fa-fw fa-clipboard-list"></i>
-                        <span>Surveys</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="~/blotter.aspx">
-                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
-                        <span>Revenue</span>
                     </a>
                 </li>
 
@@ -390,45 +500,39 @@
                             @using (Html.BeginForm("Location", "Home", FormMethod.Post))
                             {
                                 <div class="container py-4">
-                                    <h5 class="text-center">ADD RESIDENTS LOCATION ON THE MAP</h5>
+                                   
                                     <div class="card">
                                         <div class="card-header bg-danger">
-                                            <h6 class="card-title text-uppercase text-white">BARANGAY HAGONOY</h6>
+                                            <h6 class="card-title text-uppercase text-white">BARANGAY HAGONOY ADD RESIDENT LOCATION ON THE MAP</h6>
                                         </div>
 
                                         <div class="form-row justify-content-center">
-                                            <div class="col-lg-4 col-lg-offset-4">
+                                            <div class="col-sm-4 col-md-3 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Residence Name:</label>
                                                     <input type="text" class="form-control" placeholder="Recidence Name" name="ResidenceName" id="purok" required="Please fill up">
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-3 col-xs-12">
+                                            <div class="col-sm-4 col-md-2 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Latitude:</label>
                                                     <input type="text" class="form-control" placeholder="lat" name="Latitude" id="lat" required="Please fill up">
 
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-3 col-xs-12">
+                                            <div class="col-sm-4 col-md-2 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Longitude:</label>
                                                     <input type="text" class="form-control" placeholder="lng" name="Longitude" id="lng" required="Please fill up">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-lg-offset-4">
-                                                <div class="form-group">
-                                                    <label>Address:</label>
-                                                    <input type="text" class="form-control" placeholder="Address" name="Address" id="Address" required="Please fill up">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4 col-md-3 col-xs-12">
+                                            <div class="col-sm-4 col-md-2 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Occupation:</label>
-                                                    <input type="text" class="form-control" placeholder="Occupation" name="Occupation" id="purok" required="Please fill up">
+                                                    <input type="text" class="form-control" placeholder="Occupation" name="Occupation" id="Occupations" required="Please fill up">
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-3 col-xs-12">
+                                            <div class="col-sm-4 col-md-2 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Contact Number:</label>
                                                     <input type="text" class="form-control" placeholder="Contact Number" name="Contact" id="Contact" required="Please fill up">
@@ -436,31 +540,95 @@
                                             </div>
                                             <div class="col-sm-4 col-md-3 col-xs-12">
                                                 <div class="form-group">
-                                                    <label for="place">Sex:</label>
-                                                    <select id="place" name="Sex">
-                                                        <option value="male">Male</option>
-                                                        <option value="female">female</option>
+                                                    <label>Address:</label>
+                                                    <input type="text" class="form-control" placeholder="Address" name="Address" id="description" required="Please fill up">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2 col-xs-12">
+                                                <div class="form-group">
+                                                    <label>Sex:</label>
+                                                    <select runat="server" id="Sex" name="Sex" required="Please fill up" class="form-control">
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
 
                                                     </select>
-
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-3 col-xs-12">
+                                            <div class="col-sm-4 col-md-2 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Religion:</label>
-                                                    <input type="text" class="form-control" placeholder="Religion" name="Religion" id="Contact" required="Please fill up">
+                                                    <select runat="server" id="Religion" name="Religion" required="Please fill up" class="form-control">
+                                                        <option value="Roman Catholic">Roman Catholic</option>
+                                                        <option value="Iglesia ni Cristo">Iglesia ni Cristo</option>
+                                                        <option value="Protestant">Protestant</option>
+                                                        <option value="Aglipayan">Aglipayan</option>
+                                                        <option value="Seventh-day Adventist">Seventh-day Adventist</option>
+                                                        <option value="Bible Baptist Church">Bible Baptist Church</option>
+                                                        <option value="United Church of Christ in the Philippines">United Church of Christ in the Philippines</option>
+                                                        <option value="Jehovah's Witnesses">Jehovah's Witnesses</option>
+                                                        <option value="Islam">Islam</option>
+                                                        <option value="Born Again Christian">Aglipayan</option>
+                                                        <option value="Buddhism">Buddhism</option>
+                                                        <option value="Hinduism">Hinduism</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2 col-xs-12">
+                                                <div class="form-group">
+                                                    <label>Status:</label>
+                                                    <select runat="server" id="Status" name="Status" required="Please fill up" class="form-control">
+                                                        <option value="Single">Single</option>
+                                                        <option value="Married">Married</option>
+                                                        <option value="Widowed">Widowed</option>
+                                                        <option value="separated">separated</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2 col-xs-12">
+                                                <div class="form-group">
+                                                    <label for="birthday">Birthday:</label>
+                                                    <input type="date" id="Birthday" name="Birthday" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-sm-4 col-md-3 col-xs-12">
                                                 <div class="form-group">
-                                                    <label>Civil Status:</label>
-                                                    <input type="text" class="form-control" placeholder="Civil Status" name="Status" id="Contact" required="Please fill up">
+
+                                                    <input type="text" class="form-control" hidden="trues" />
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-lg-offset-4">
+                                            <div class="col-sm-4 col-md-2 col-xs-12">
                                                 <div class="form-group">
-                                                    <label for="birthday">Birthday:</label>
-                                                    <input type="date" id="birthday" name="Birthday">
+                                                    <label>National ID:</label>
+                                                    <input type="text" class="form-control" placeholder="National ID" name="NationalId" id="NationalId" required="Please fill up">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2 col-xs-12">
+                                                <div class="form-group">
+                                                    <label>Others:</label>
+                                                    <select runat="server" id="Other" name="Other" required="Please fill up" class="form-control">
+                                                        <option value="None">None</option>
+
+                                                        <option value="Senior Citizen">Senior Citizen</option>
+                                                        <option value="PWD's">PWD's</option>
+                                                        <option value="4ps">4ps</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2 col-xs-12">
+                                                <div class="form-group">
+                                                    <label>Voter:</label>
+                                                    <select runat="server" id="Voter" name="Voter" required="Please fill up" class="form-control">
+                                                        <option value="Yes">Yes</option>
+                                                        <option value="No">No</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-3 col-xs-12">
+                                                <div class="form-group">
+                                                   <input  type="text" class="form-control" name="Barangay" id="Barangay" value="Hagonoy" hidden="true" />
                                                 </div>
                                             </div>
 
@@ -471,7 +639,7 @@
                                         <a type="button" class="btn btn-info rounded-0" href="/Home/Update">Update</a>
                                         <button class="btn btn-primary rounded-0">Submit</button>
                                     </div>
-                                    <div id="dvMap" class="card" style="width: 100% !important; height: 500px !important ">
+                                    <div id="dvMap" class="card" style="width: 100% !important; height: 500px  ">
                                     </div>
                                     <!-- Display geolocation data -->
 
@@ -480,27 +648,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container">
-                    <br />
-                    <div style="width:90%; margin:0 auto;">
-                        <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>CustomerID</th>
-                                    <th>CompanyName</th>
-                                    <th>ContactName</th>
-                                    <th>ContactTitle</th>
-                                    <th>City</th>
-                                    <th>PostalCode</th>
-                                    <th>Country</th>
-                                    <th>Phone</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
+                
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">

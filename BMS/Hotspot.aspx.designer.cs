@@ -33,22 +33,13 @@ namespace BMS
         protected global::System.Web.UI.WebControls.Label lb1;
 
         /// <summary>
-        /// ddlChart control.
+        /// PieChartMonthToDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlChart;
-
-        /// <summary>
-        /// Chart1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart1;
+        protected global::System.Web.UI.DataVisualization.Charting.Chart PieChartMonthToDate;
 
         /// <summary>
         /// Label1 control.
@@ -87,13 +78,13 @@ namespace BMS
         protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// date control.
+        /// report control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox date;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect report;
 
         /// <summary>
         /// btnSearch control.
@@ -112,14 +103,5 @@ namespace BMS
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptMarkers;
-
-        /// <summary>
-        /// GridView1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
     }
 }

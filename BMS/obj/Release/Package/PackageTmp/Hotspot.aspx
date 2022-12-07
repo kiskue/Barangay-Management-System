@@ -119,7 +119,7 @@
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
+                      <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                        aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-address-book"></i>
@@ -129,7 +129,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Resident of Barangay:</h6>
                             <a class="collapse-item" href="/Home/Location">Residents</a>
-                            <a class="collapse-item" href="cards.html">Resident list</a>
+                     
                         </div>
                     </div>
                 </li>
@@ -150,32 +150,39 @@
                             <a class="collapse-item" href="utilities-animation.html">CEDULA</a>
                         </div>
                     </div>
-                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse"
+                   
+                    
+                </li>
+             
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitie"
                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-male"></i>
-                        <span>Manage Roles</span>
+                        <i class="fas fa-fw fa-file"></i>
+                        <span>Permits</span>
                     </a>
-                    <div id="collapse" class="collapse" aria-labelledby="headingUtilities"
+                    <div id="collapseUtilitie" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Roles:</h6>
-                            <a class="collapse-item" href="ManageRoles.aspx">Super Admin</a>
-                            <a class="collapse-item" href="barangaycertificates.aspx">Admin 1</a>
-                            <a class="collapse-item" href="utilities-animation.html">Admin 2</a>
+                            <h6 class="collapse-header">Permits:</h6>
+                            <a class="collapse-item" href="barangaycertificates.aspx">Business Permits</a>
+                            <a class="collapse-item" href="barangaycertificates.aspx">Building permits</a>
+                           
                         </div>
                     </div>
+                   
+                    
                 </li>
-
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
+                   <li class="nav-item">
+                    <a class="nav-link" href="BarangayOfficials.aspx">
+                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
+                        <span>Sanguniang Barangay</span>
+                    </a>
                 </li>
+
+                
                 <li class="nav-item">
                     <a class="nav-link" href="Hotspot.aspx">
                         <i class="fas fa-fw fa-chart-area"></i>
@@ -196,18 +203,7 @@
                         <span>Calendar</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="blotter.aspx">
-                        <i class="fas fa-fw fa-clipboard-list"></i>
-                        <span>Surveys</span>
-                    </a>
-                </li>
-                 <li class="nav-item">
-                    <a class="nav-link" href="blotter.aspx">
-                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
-                        <span>Revenue</span>
-                    </a>
-                </li>
+              
 
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">

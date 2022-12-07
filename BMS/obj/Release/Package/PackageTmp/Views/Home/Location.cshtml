@@ -50,70 +50,7 @@
     <script src="~/js/demo/chart-pie-demo.js"></script>
     <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
 
-        $('#demoGrid').dataTable({
-        });
-
-
-        "processing": true, // for show progress bar
-            "serverSide": true, // for process server side
-                "filter": true, // this is for disable filter (search box)
-                    "orderMulti": false, // for disable multiple column at once
-                        "pageLength": 5,
-
-                            "ajax": {
-            "url": "/Demo/LoadData",
-                "type": "POST",
-                    "datatype": "json"
-        },
-
-        "columnDefs":
-        [{
-            "targets": [0],
-            "visible": false,
-            "searchable": false
-        },
-        {
-            "targets": [7],
-            "searchable": false,
-            "orderable": false
-        },
-        {
-            "targets": [8],
-            "searchable": false,
-            "orderable": false
-        },
-        {
-            "targets": [9],
-            "searchable": false,
-            "orderable": false
-        }],
-
-            "columns": [
-                { "data": "CustomerID", "name": "CustomerID", "autoWidth": true },
-                { "data": "CompanyName", "name": "CompanyName", "autoWidth": true },
-                { "data": "ContactName", "title": "ContactName", "name": "ContactName", "autoWidth": true },
-                { "data": "ContactTitle", "name": "ContactTitle", "autoWidth": true },
-                { "data": "City", "name": "City", "autoWidth": true },
-                { "data": "PostalCode", "name": "PostalCode", "autoWidth": true },
-                { "data": "Country", "name": "Country", "autoWidth": true },
-                { "data": "Phone", "name": "Phone", "title": "Status", "autoWidth": true },
-                {
-                    "render": function (data, type, full, meta) { return '<a class="btn btn-info" href="/Demo/Edit/' + full.CustomerID + '">Edit</a>'; }
-                },
-                {
-                    data: null, render: function (data, type, row) {
-                        return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.CustomerID + "'); >Delete</a>";
-                    }
-                },
-
-            ]
-
-                });
-            });
-    </script>
-    </script>
     <script type="text/javascript">
 
         var markers = @Html.Raw(ViewBag.Markers);
@@ -245,7 +182,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Resident of Barangay:</h6>
                             <a class="collapse-item" href="/Home/Location">Residents</a>
-                            <a class="collapse-item" href="cards.html">Resident list</a>
+
                         </div>
                     </div>
                 </li>
@@ -263,30 +200,40 @@
                             <h6 class="collapse-header">Certificates:</h6>
                             <a class="collapse-item" href="~/barangaycertificates.aspx">Barangay Clearance</a>
                             <a class="collapse-item" href="~/barangaycertificates.aspx">Barangay Indigency</a>
-                            <a class="collapse-item" href="utilities-animation.html">CEDULA</a>
+                            <a class="collapse-item" href="~/utilities-animation.html">CEDULA</a>
                         </div>
                     </div>
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse"
+
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitie"
                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-male"></i>
-                        <span>Manage Roles</span>
+                        <i class="fas fa-fw fa-file"></i>
+                        <span>Permits</span>
                     </a>
-                    <div id="collapse" class="collapse" aria-labelledby="headingUtilities"
+                    <div id="collapseUtilitie" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Roles:</h6>
-                            <a class="collapse-item" href="ManageRoles.aspx">Super Admin</a>
-                            <a class="collapse-item" href="barangaycertificates.aspx">Admin 1</a>
-                            <a class="collapse-item" href="utilities-animation.html">Admin 2</a>
+                            <h6 class="collapse-header">Permits:</h6>
+                            <a class="collapse-item" href="~/barangaycertificates.aspx">Business Permits</a>
+                            <a class="collapse-item" href="~/barangaycertificates.aspx">Building permits</a>
+
                         </div>
                     </div>
-                </li>
 
+
+                </li>
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
-                <!-- Heading -->
-                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link" href="~/BarangayOfficials.aspx">
+                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
+                        <span>Sanguniang Barangay</span>
+                    </a>
+                </li>
+
 
                 <li class="nav-item">
                     <a class="nav-link" href="~/Hotspot.aspx">
@@ -306,18 +253,6 @@
                     <a class="nav-link" href="~/blotter.aspx">
                         <i class="fas fa-fw fa-calendar"></i>
                         <span>Calendar</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="~/blotter.aspx">
-                        <i class="fas fa-fw fa-clipboard-list"></i>
-                        <span>Surveys</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="~/blotter.aspx">
-                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
-                        <span>Revenue</span>
                     </a>
                 </li>
 
@@ -471,7 +406,7 @@
                                         <a type="button" class="btn btn-info rounded-0" href="/Home/Update">Update</a>
                                         <button class="btn btn-primary rounded-0">Submit</button>
                                     </div>
-                                    <div id="dvMap" class="card" style="width: 100% !important; height: 500px !important ">
+                                    <div id="dvMap" class="card" style="width: 100% !important; height: 500px  ">
                                     </div>
                                     <!-- Display geolocation data -->
 

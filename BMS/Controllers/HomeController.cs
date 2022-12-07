@@ -71,6 +71,10 @@ namespace BMS.Controllers
                     cmd.Parameters.AddWithValue("@Sex", location.Sex);
                     cmd.Parameters.AddWithValue("@Religion", location.Religion);
                     cmd.Parameters.AddWithValue("@Status", location.Status);
+                    cmd.Parameters.AddWithValue("@Other", location.Other);
+                    cmd.Parameters.AddWithValue("@NationalId", location.NationalId);
+                    cmd.Parameters.AddWithValue("@Voter", location.Voter);
+                    cmd.Parameters.AddWithValue("@Barangay", location.Barangay);
                     cmd.ExecuteNonQuery();
 
                     TempData["pesan"] = "Data has been save successfuly!!";

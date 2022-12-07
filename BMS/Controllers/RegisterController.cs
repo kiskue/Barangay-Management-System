@@ -15,7 +15,7 @@ namespace BMS.Controllers
 {
     public class RegisterController : Controller
     {
-        loginEntities objCon = new loginEntities();
+        loginEntities1 objCon = new loginEntities1();
         // GET: Register
         public ActionResult Index()
         {

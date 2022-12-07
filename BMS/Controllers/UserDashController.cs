@@ -17,6 +17,26 @@ namespace BMS.Controllers
         // GET: UserDash
         public ActionResult Index()
         {
+            string markers = "[";
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("GetMaps", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    markers += "{";
+                    markers += string.Format("'title': '{0}',", sdr["Landmark"]);
+                    markers += string.Format("'lat': '{0}',", sdr["Latitude"]);
+                    markers += string.Format("'lng': '{0}',", sdr["Longitude"]);
+                    markers += string.Format("'description': '{0}'", sdr["IncidentReport"]);
+                    markers += "},";
+                }
+            }
+            markers += "];";
+            ViewBag.Markers = markers;
             return View();
         }
 
@@ -26,41 +46,6 @@ namespace BMS.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Register");
         }
-        public ActionResult Certificates()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Certificates(Certificate certificate)
-        {
-            if (ModelState.IsValid)
-            {
-                string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(CS))
-                {
-                    SqlCommand cmd = new SqlCommand("AddCertificates", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    con.Open();
-     
-                    cmd.Parameters.AddWithValue("@Name", certificate.Name);
-                    cmd.Parameters.AddWithValue("@Email", certificate.Email);
-                    cmd.Parameters.AddWithValue("@Number", certificate.Number);
-                    cmd.Parameters.AddWithValue("@StreetNum", certificate.StreetNum);
-                    cmd.Parameters.AddWithValue("@Purok", certificate.Purok);
-                    cmd.Parameters.AddWithValue("@Purpose", certificate.Purpose);
-                    cmd.Parameters.AddWithValue("@Day", certificate.Day);
-                    cmd.Parameters.AddWithValue("@Month", certificate.Month);
-                    cmd.Parameters.AddWithValue("@Year", certificate.Year);
-                    cmd.ExecuteNonQuery();
-
-                    TempData["pesan"] = "Data has been save successfuly!!";
-                }
-            }
-            else
-            {
-
-            }
-            return RedirectToAction("Certificates");
-        }
+       
     }
 }

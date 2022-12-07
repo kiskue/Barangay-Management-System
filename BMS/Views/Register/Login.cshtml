@@ -28,21 +28,10 @@
 <!-- Custom scripts for all pages-->
 <script src="~/js/sb-admin-2.min.js"></script>
 
-<script>
-
-
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-    }
-
-    function showPosition(position) {
-        document.getElementById("lat").value = position.coords.latitude;
-        document.getElementById("lng").value = position.coords.longitude;
-    }
+<script type="text/javascript">
+    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
 </script>
 
 
@@ -125,10 +114,9 @@
                                     </div>
                                 }
 
-                                <div style="margin-left:70px; margin-bottom:10px;">
-                                    @Html.ActionLink("Registration", "Index") ||
-                                    <a href="~/Index.aspx">Admin</a>
-
+                                <div style="margin-left:70px; margin-bottom:10px;"> 
+                                    @Html.ActionLink("Registration", "Index") 
+                                    
 
                                 </div>
                             </div>

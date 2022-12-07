@@ -40,48 +40,6 @@
     <script src="js/demo/chart-pie-demo.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuVyZWwqTq86AJctzNQmhb2hmUt5M7tQE"></script>
 
-<script type="text/javascript">
-  
-    window.onload = function () {
-        var mapOptions = {
-            center: new google.maps.LatLng(markers[0].lat, markers[0].lng),    
-            zoom: 15,
-            panControl: true,
-            zoomControl: true,
-            mapTypeControl: true,
-            scaleControl: true,
-            streetViewControl: true,
-            overviewMapControl: true,
-            rotateControl: true,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-
-        };
-        var infoWindow = new google.maps.InfoWindow();
-        var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
-        for (i = 0; i < markers.length; i++) {
-            var data = markers[i]
-            var myLatlng = new google.maps.LatLng(data.lat, data.lng);
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                draggable: true,
-                map: map,
-                title: data.title
-
-            });
-            (function (markers, data) {
-                google.maps.event.addListener(marker, "click", function (e) {
-                    infoWindow.setContent(data.description);
-                    infoWindow.open(map, marker);
-                    var pos = map.getZoom();
-                    map.setZoom(19);
-                    map.setCenter(marker.getPosition());
-                    window.setTimeout(function() {map.setZoom(pos);},10000);
-                });
-            
-            })(markers, data);
-        }
-    }
-</script>
 
 </head>
 <body id="page-top" >
@@ -119,7 +77,7 @@
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
+                       <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                        aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-address-book"></i>
@@ -129,7 +87,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Resident of Barangay:</h6>
                             <a class="collapse-item" href="/Home/Location">Residents</a>
-                            <a class="collapse-item" href="cards.html">Resident list</a>
+                     
                         </div>
                     </div>
                 </li>
@@ -146,36 +104,48 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Certificates:</h6>
                             <a class="collapse-item" href="barangaycertificates.aspx">Barangay Clearance</a>
-                            <a class="collapse-item" href="barangaycertificates.aspx">Barangay Indigency</a>
+                            <a class="collapse-item" href="BarangayIndigency.aspx">Barangay Indigency</a>
                             <a class="collapse-item" href="utilities-animation.html">CEDULA</a>
                         </div>
                     </div>
-                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse"
+                   
+                    
+               
+                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitie"
                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-male"></i>
-                        <span>Manage Roles</span>
+                        <i class="fas fa-fw fa-file"></i>
+                        <span>Permits</span>
                     </a>
-                    <div id="collapse" class="collapse" aria-labelledby="headingUtilities"
+                    <div id="collapseUtilitie" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Roles:</h6>
-                            <a class="collapse-item" href="ManageRoles.aspx">Super Admin</a>
-                            <a class="collapse-item" href="barangaycertificates.aspx">Admin 1</a>
-                            <a class="collapse-item" href="utilities-animation.html">Admin 2</a>
+                            <h6 class="collapse-header">Permits:</h6>
+                            <a class="collapse-item" href="BusinessPermit.aspx">Business Permits</a>
+                            <a class="collapse-item" href="BuildingPermit.aspx">Building permits</a>
+                           
                         </div>
                     </div>
+                   
+                    
                 </li>
-
                 <!-- Divider -->
                 <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
+                 <li class="nav-item">
+                    <a class="nav-link" href="ManageRoles.aspx">
+                        <i class="fas fa-fw fa-address-book"></i>
+                        <span>Manage Roles</span>
+                    </a>
                 </li>
+                   <li class="nav-item">
+                    <a class="nav-link" href="BarangayOfficials.aspx">
+                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
+                        <span>Sanguniang Barangay</span>
+                    </a>
+                </li>
+
+                
                 <li class="nav-item">
                     <a class="nav-link" href="Hotspot.aspx">
                         <i class="fas fa-fw fa-chart-area"></i>
@@ -196,19 +166,7 @@
                         <span>Calendar</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="blotter.aspx">
-                        <i class="fas fa-fw fa-clipboard-list"></i>
-                        <span>Surveys</span>
-                    </a>
-                </li>
-                 <li class="nav-item">
-                    <a class="nav-link" href="blotter.aspx">
-                        <i class="fas fa-fw fa-sort-amount-up-alt"></i>
-                        <span>Revenue</span>
-                    </a>
-                </li>
-
+              
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
@@ -316,7 +274,7 @@
                             <div class="col-lg-3 col-lg-offset-3 mr-5">
                                 <div class="form-group">
                                     <label>Punong Barangay:</label>
-                                    <asp:Textbox runat="server" type="text" class="form-control"  name="Name" ID="punongb" />
+                                    <asp:Textbox runat="server" type="text" class="form-control"  name="Name" ID="punongb"  />
                                     <asp:Label ID="lblSID" runat="server" Visible="false"/>
                                 </div>
                             </div>

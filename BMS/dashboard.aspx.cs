@@ -4,22 +4,90 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using System.Web.UI.DataVisualization.Charting;
 using System.Text;
 using System.Collections;
 using System.Data;
 using System.IO;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Web.Security;
+
 
 namespace BMS
 {
     public partial class dashboard : System.Web.UI.Page
     {
         public object CityName { get; internal set; }
-
+      
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("select IncidentReport, count(ID) Total from Report where  Barangay = 'Hagonoy' group by IncidentReport", conn))
+                    {
+                        Series series = PieChartMonthToDate.Series["Series1"];
+                        conn.Open();
+                        SqlDataReader rdr = cmd.ExecuteReader();
+                        while (rdr.Read())
+                        {
+                            series.Points.AddXY(rdr["IncidentReport"].ToString(), rdr["Total".ToString()]);
+                            PieChartMonthToDate.Series["Series1"].Label = "#PERCENT{P2}";
+                            PieChartMonthToDate.Series["Series1"].LegendText = "#VALX";
+                            PieChartMonthToDate.Legends[0].LegendStyle = LegendStyle.Column;
+                            PieChartMonthToDate.Legends[0].Docking = Docking.Right;
+                            PieChartMonthToDate.Legends[0].Alignment = System.Drawing.StringAlignment.Center;
+                        }
+                        rdr.Close();
+                    }
+                }
+            }
+            if (!IsPostBack)
+            {
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("select Religion, count(ID) Total from GoogleMap where  Barangay = 'Hagonoy' group by Religion", conn))
+                    {
+                        Series series = Chart1.Series["Series1"];
+                        conn.Open();
+                        SqlDataReader rdr = cmd.ExecuteReader();
+                        while (rdr.Read())
+                        {
+                            series.Points.AddXY(rdr["Religion"].ToString(), rdr["Total".ToString()]);
+                            Chart1.Series["Series1"].Label = "#PERCENT{P2}";
+                            Chart1.Series["Series1"].LegendText = "#VALX";
+                            Chart1.Legends[0].LegendStyle = LegendStyle.Column;
+                            Chart1.Legends[0].Docking = Docking.Right;
+                            Chart1.Legends[0].Alignment = System.Drawing.StringAlignment.Center;
+                        }
+                        rdr.Close();
+                    }
+                }
+            }
+            if (!IsPostBack)
+            {
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("select Status, count(ID) Total from GoogleMap where  Barangay = 'Hagonoy' group by Status", conn))
+                    {
+                        Series series = Chart2.Series["Series1"];
+                        conn.Open();
+                        SqlDataReader rdr = cmd.ExecuteReader();
+                        while (rdr.Read())
+                        {
+                            series.Points.AddXY(rdr["Status"].ToString(), rdr["Total".ToString()]);
+                            Chart2.Series["Series1"].Label = "#PERCENT{P2}";
+                            Chart2.Series["Series1"].LegendText = "#VALX";
+                            Chart2.Legends[0].LegendStyle = LegendStyle.Column;
+                            Chart2.Legends[0].Docking = Docking.Right;
+                            Chart2.Legends[0].Alignment = System.Drawing.StringAlignment.Center;
+                        }
+                        rdr.Close();
+                    }
+                }
+            }
             lb1.Text = "<b><font color=black>" + "Welcome : " + "</font>" + "<b><font color=blue>" + Session["Username"] + "</font>";
             if (!this.IsPostBack)
             {
@@ -63,7 +131,7 @@ namespace BMS
                     }
                     con.Close();
                 }
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) As Count FROM Command", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) As Count FROM GoogleMap Where Voter ='Yes';", con))
                 {
                     cmd.CommandType = CommandType.Text;
                     con.Open();
@@ -110,10 +178,14 @@ namespace BMS
                 }
                 else
                 {
-                    Response.Write("<script language='javascript'>alert('No result found by this location')</script>");
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+              "swal('Not Found!', 'No Data Recorded!', 'error')", true);
+
 
                 }
+
             }
+           
         }
     }
 }
